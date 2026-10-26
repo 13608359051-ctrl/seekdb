@@ -62,6 +62,7 @@ endif()
 file(GLOB_RECURSE _rust_sources CONFIGURE_DEPENDS "${RUST_CRATE_DIR}/src/*.rs")
 list(APPEND _rust_sources
   "${RUST_WORKSPACE_DIR}/Cargo.toml"
+  "${RUST_WORKSPACE_DIR}/Cargo.lock"
   "${RUST_WORKSPACE_DIR}/rust-toolchain.toml"
   "${RUST_CRATE_DIR}/Cargo.toml")
 
@@ -115,6 +116,7 @@ add_custom_command(
   OUTPUT "${RUST_STATICLIB}"
   COMMAND "${CMAKE_COMMAND}" -E env ${_rust_build_env}
           "${CARGO}" build ${_cargo_profile_flag}
+          --locked
           --manifest-path "${RUST_WORKSPACE_DIR}/Cargo.toml"
           --package sql-nio
   WORKING_DIRECTORY "${RUST_WORKSPACE_DIR}"
