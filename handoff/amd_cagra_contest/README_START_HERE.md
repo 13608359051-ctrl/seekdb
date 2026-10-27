@@ -38,6 +38,7 @@ kimi/amd-cagra-opt
 3. `RUNBOOK_RADEON_CLOUD.md`：从领取算力到编译、冒烟、测速。
 4. `RESULTS_TEMPLATE.md`：结果必须怎么记录。
 5. `SUBMISSION_CHECKLIST.md`：提交前逐项打勾。
+6. `REFERENCES.md`：赛题、基线、部署、Notebook、Radeon Cloud 的原始链接。
 
 `bench_build.py` 是开发测速入口，**只在 lib=vsag 上验证过 SQL/计时链**，CAGRA/GPU 未跑。
 `results/bench_harness_vsag_selftest.json` 只是脚本自检，不是本题性能证据。
