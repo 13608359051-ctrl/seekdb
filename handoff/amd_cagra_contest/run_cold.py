@@ -34,6 +34,7 @@ def main():
     parser.add_argument("--datasets", nargs="+", choices=("D1", "D2", "D3"), default=["D1", "D2", "D3"])
     parser.add_argument("--port", type=int, default=2981)
     parser.add_argument("--phase-only", action="store_true")
+    parser.add_argument("--repeats", nargs="+", type=int, choices=(1, 2, 3), default=[1, 2, 3])
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=False)
     observer, bridge = args.observer.resolve(strict=True), args.bridge.resolve(strict=True)
@@ -42,7 +43,7 @@ def main():
     failures = 0
     for dataset in args.datasets:
         rows, dim = configs[dataset]
-        for repeat in range(1, 4):
+        for repeat in args.repeats:
             run = args.out / f"{dataset}_r{repeat}"
             run.mkdir()
             trace = run / "trace.log"
