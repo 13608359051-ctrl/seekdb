@@ -105,6 +105,8 @@ def main():
     conn = pymysql.connect(host=HOST, port=PORT, user=USER, password=PASSWORD,
                            database="", autocommit=True)
     cur = conn.cursor()
+    cur.execute("SET SESSION ob_query_timeout=1800000000")
+    cur.execute("SET SESSION ob_trx_timeout=1800000000")
     cur.execute(f"CREATE DATABASE {db}")
     cur.execute(f"USE {db}")
     cur.execute(
@@ -216,6 +218,7 @@ def main():
             "python": sys.version,
             "numpy": np.__version__,
             "pymysql": pymysql.__version__,
+            "query_and_transaction_timeout_us": 1800000000,
         },
         "data": {
             "rows": args.rows,
