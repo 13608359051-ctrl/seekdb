@@ -1,0 +1,49 @@
+{
+  "config": {
+    "rows": 2000,
+    "dim": 32,
+    "queries": 20,
+    "first_k": 10,
+    "seed": 42,
+    "lib": "vsag",
+    "distance": "L2",
+    "m": 16,
+    "ef_construction": 200,
+    "ef_search": 200,
+    "batch": 500,
+    "out": "E:/OceanBase2026/seekdb_amd_v4/handoff/amd_cagra_contest/results/bench_harness_vsag_selftest.json"
+  },
+  "environment": {
+    "host": "127.0.0.1",
+    "port": 2881,
+    "python": "3.12.15 (main, Oct 21 2026, 17:48:33) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.5.1",
+    "pymysql": "2.2.8"
+  },
+  "data": {
+    "rows": 2000,
+    "dim": 32,
+    "queries": 20,
+    "seed": 42,
+    "generator": "numpy standard_normal float32"
+  },
+  "timing": {
+    "load_sec": 0.19253720000051544,
+    "create_index_sec": 1.0352994999993825,
+    "first_query_sec": 0.012834599998313934,
+    "build_total_sec": 1.0481340999976965,
+    "first_query_rows": 10
+  },
+  "recall": {
+    "recall@10": 0.9949999999999999,
+    "recall@100": 0.9884999999999999
+  },
+  "query_latency_ms": {
+    "mean": 1.435624999794527,
+    "p50": 1.3565499994001584,
+    "p95": 2.297700000781333,
+    "max": 2.297700000781333
+  },
+  "index_ddl": "CREATE VECTOR INDEX idx_v ON vecs(v) WITH (DISTANCE=L2, TYPE=hnsw, LIB=vsag, M=16, EF_CONSTRUCTION=200, EF_SEARCH=200)",
+  "note": "One fresh DB/index per invocation. Restart seekdb between runs; first query is included in build_total_sec."
+}
