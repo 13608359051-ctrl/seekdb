@@ -157,6 +157,66 @@ public:
   roaring::api::roaring64_bitmap_t* bitmap_;
 };
 
+#ifdef OB_BUILD_CUVS
+TEST_F(TestVsagAdaptor, cuvs_snapshot_round_trip)
+{
+  DefaultVsagAllocator allocator;
+  obvsag::VectorIndexPtr source = nullptr, restored = nullptr, cpu = nullptr;
+  auto create = [&](obvsag::VectorIndexPtr &handle) {
+    return obvsag::create_index(handle, obvsag::HNSW_TYPE, "float32", "l2", 4,
+                               16, 200, 200, &allocator);
+  };
+  ASSERT_EQ(OB_SUCCESS, create(source));
+  ASSERT_EQ(OB_SUCCESS, create(restored));
+  ASSERT_EQ(OB_SUCCESS, create(cpu));
+  obvsag::mark_cuvs_index(source);
+  obvsag::mark_cuvs_index(restored);
+  int64_t ids[32];
+  float vectors[32 * 4];
+  for (int i = 0; i < 32; ++i) {
+    ids[i] = 10000 + i * 17;
+    for (int j = 0; j < 4; ++j) { vectors[i * 4 + j] = (i * 4 + j) * 0.125f; }
+  }
+  ASSERT_EQ(OB_SUCCESS, obvsag::add_index(source, vectors, ids, 4, 32));
+  std::ostringstream out;
+  ASSERT_EQ(OB_SUCCESS, obvsag::fserialize(source, out));
+  const std::string bytes = out.str();
+  const size_t payload_size = 3 * sizeof(uint64_t) + sizeof(ids) + sizeof(vectors);
+  ASSERT_GT(bytes.size(), payload_size);
+  const size_t offset = bytes.size() - payload_size;
+  ASSERT_EQ(0, memcmp(bytes.data() + offset + 3 * sizeof(uint64_t), ids, sizeof(ids)));
+  ASSERT_EQ(0, memcmp(bytes.data() + offset + 3 * sizeof(uint64_t) + sizeof(ids), vectors, sizeof(vectors)));
+  std::istringstream in(bytes);
+  ASSERT_EQ(OB_SUCCESS, obvsag::fdeserialize(restored, in));
+  std::ostringstream round_trip;
+  ASSERT_EQ(OB_SUCCESS, obvsag::fserialize(restored, round_trip));
+  ASSERT_EQ(bytes.substr(offset), round_trip.str().substr(round_trip.str().size() - payload_size));
+
+  // A lib=vsag handle ignores the optional GPU data and keeps the CPU format.
+  std::istringstream cpu_input(bytes);
+  ASSERT_EQ(OB_SUCCESS, obvsag::fdeserialize(cpu, cpu_input));
+  std::ostringstream cpu_output;
+  ASSERT_EQ(OB_SUCCESS, obvsag::fserialize(cpu, cpu_output));
+  ASSERT_EQ(offset, cpu_output.str().size());
+  std::istringstream legacy(cpu_output.str());
+  ASSERT_EQ(OB_SUCCESS, obvsag::fdeserialize(restored, legacy));
+  std::ostringstream legacy_output;
+  ASSERT_EQ(OB_SUCCESS, obvsag::fserialize(restored, legacy_output));
+  ASSERT_EQ(offset, legacy_output.str().size());
+
+  std::string corrupted = bytes;
+  const uint64_t wrong_count = 33;
+  memcpy(&corrupted[offset + 2 * sizeof(uint64_t)], &wrong_count, sizeof(wrong_count));
+  std::istringstream bad_count(corrupted), truncated(bytes.substr(0, bytes.size() - 4));
+  ASSERT_EQ(OB_INVALID_DATA, obvsag::fdeserialize(restored, bad_count));
+  ASSERT_EQ(OB_INVALID_DATA, obvsag::fdeserialize(restored, truncated));
+  ASSERT_EQ(OB_SUCCESS, obvsag::delete_index(source));
+  ASSERT_EQ(OB_SUCCESS, obvsag::delete_index(restored));
+  ASSERT_EQ(OB_SUCCESS, obvsag::delete_index(cpu));
+  ASSERT_EQ(0, allocator.total_);
+}
+#endif
+
 TEST_F(TestVsagAdaptor, test_hnsw)
 {
   ASSERT_TRUE(obvsag::is_init());

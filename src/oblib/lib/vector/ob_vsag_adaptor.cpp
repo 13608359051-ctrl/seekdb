@@ -25,6 +25,8 @@
 #include <cstdio>
 #include <cstring>
 #include <pthread.h>
+#include <limits>
+#include <memory>
 #include "vsag/vsag.h"
 #include "vsag/errors.h"
 #include "vsag/dataset.h"
@@ -151,6 +153,76 @@ static void ob_cuvs_erase(void *key) {
     if (it->second->bridge_) { seekdb_cuvs_free(it->second->bridge_); }
     delete it->second; g_ob_cuvs_reg.erase(it);
   }
+}
+// Keep raw FP32 inputs with the CPU snapshot; CAGRA itself remains lazy.
+static const uint64_t CUVS_SNAPSHOT_MAGIC = 0x3141524741434b53ULL; // SKCAGRA1
+static int ob_cuvs_save(void *key, std::ostream &out, int64_t count) {
+  std::vector<float> vectors;
+  std::vector<int64_t> ids;
+  int dim = 0;
+  try {
+    {
+      std::lock_guard<std::mutex> guard(g_ob_cuvs_mu);
+      auto it = g_ob_cuvs_reg.find(key);
+      if (it == g_ob_cuvs_reg.end()) { return OB_SUCCESS; }
+      vectors = it->second->buf_vecs_;
+      ids = it->second->buf_ids_;
+      dim = it->second->dim_;
+    }
+  } catch (const std::bad_alloc &) { return OB_ALLOCATE_MEMORY_FAILED; }
+  if (ids.empty() || ids.size() != static_cast<uint64_t>(count)) {
+    ob_vsag_trace("cuvs_save_skip", key, ids.size(), count);
+    return OB_SUCCESS;
+  }
+  if (dim <= 0 || vectors.size() / dim != ids.size() || vectors.size() % dim != 0) {
+    return OB_INVALID_DATA;
+  }
+  const uint64_t header[] = {CUVS_SNAPSHOT_MAGIC, static_cast<uint64_t>(dim), ids.size()};
+  out.write(reinterpret_cast<const char *>(header), sizeof(header));
+  out.write(reinterpret_cast<const char *>(ids.data()), ids.size() * sizeof(int64_t));
+  out.write(reinterpret_cast<const char *>(vectors.data()), vectors.size() * sizeof(float));
+  ob_vsag_trace("cuvs_save", key, dim, ids.size());
+  return out.good() ? OB_SUCCESS : OB_INVALID_DATA;
+}
+static int ob_cuvs_load(void *key, std::istream &in, int dim, int64_t count) {
+  {
+    std::lock_guard<std::mutex> guard(g_ob_cuvs_mu);
+    auto it = g_ob_cuvs_reg.find(key);
+    if (it != g_ob_cuvs_reg.end()) {
+      seekdb_cuvs_free(it->second->bridge_);
+      delete it->second;
+      g_ob_cuvs_reg.erase(it);
+    }
+  }
+  uint64_t header[3] = {};
+  in.read(reinterpret_cast<char *>(header), sizeof(header));
+  if (in.gcount() == 0 && in.eof()) {
+    // Legacy snapshots contain only VSAG; preserve their CPU fallback behavior.
+    in.clear();
+    ob_vsag_trace("cuvs_restore_missing", key, dim, count);
+    return OB_SUCCESS;
+  }
+  const uint64_t limit = std::numeric_limits<std::streamsize>::max();
+  if (!in.good() || header[0] != CUVS_SNAPSHOT_MAGIC || dim <= 0 || count <= 0 ||
+      header[1] != static_cast<uint64_t>(dim) || header[2] != static_cast<uint64_t>(count) ||
+      header[2] > limit / sizeof(int64_t) || header[2] > limit / sizeof(float) / dim) {
+    return OB_INVALID_DATA;
+  }
+  try {
+    std::unique_ptr<ObCuvsEntry> entry(new ObCuvsEntry());
+    entry->dim_ = dim;
+    entry->buf_ids_.resize(count);
+    entry->buf_vecs_.resize(static_cast<size_t>(count) * dim);
+    in.read(reinterpret_cast<char *>(entry->buf_ids_.data()), count * sizeof(int64_t));
+    in.read(reinterpret_cast<char *>(entry->buf_vecs_.data()), entry->buf_vecs_.size() * sizeof(float));
+    if (!in.good()) { return OB_INVALID_DATA; }
+    std::lock_guard<std::mutex> guard(g_ob_cuvs_mu);
+    ObCuvsEntry *&slot = g_ob_cuvs_reg[key];
+    if (slot != nullptr) { seekdb_cuvs_free(slot->bridge_); delete slot; }
+    slot = entry.release();
+  } catch (const std::bad_alloc &) { return OB_ALLOCATE_MEMORY_FAILED; }
+  ob_vsag_trace("cuvs_restore", key, dim, count);
+  return OB_SUCCESS;
 }
 struct ObCuvsJob {
   ObCuvsEntry *ent; const float *query; int64_t topk; int dim; size_t n;
@@ -1584,6 +1656,9 @@ int fserialize(VectorIndexPtr &index_handler, std::ostream &out_stream)
     tl::expected<void, Error> bs = hnsw->get_index()->Serialize(out_stream);
     if (bs.has_value()) {
       LOG_INFO("[OBVSAG] serialize index success");
+      if (ob_cuvs_marked(index_handler)) {
+        ret = ob_cuvs_save(index_handler, out_stream, hnsw->get_index()->GetNumElements());
+      }
     } else {
       ret = vsag_errcode2ob(bs.error().type);
       LOG_WARN("[OBVSAG] fserialize error happend", K(ret), K(bs.error().type));
@@ -1648,6 +1723,9 @@ int fdeserialize(VectorIndexPtr &index_handler,
         tl::expected<void, Error> bs = hnsw_index->Deserialize(in_stream);
         if (bs.has_value()) {
           hnsw->set_index(hnsw_index);
+          if (ob_cuvs_marked(index_handler)) {
+            ret = ob_cuvs_load(index_handler, in_stream, dim, hnsw_index->GetNumElements());
+          }
           LOG_INFO("[OBVSAG] fdeserialize success", KCSTRING(result_param_str));
         } else {
           ret = vsag_errcode2ob(bs.error().type);

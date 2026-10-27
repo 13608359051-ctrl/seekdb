@@ -4277,6 +4277,9 @@ int ObPluginVectorIndexAdaptor::try_init_snap_data(ObVectorIndexAlgorithmType ac
     ret = OB_ERR_UNEXPECTED;
     LOG_WARN("get serialize type invalid", K(ret), K(actual_type), K(type_));
   }
+  if (OB_SUCC(ret) && snap_data_ != nullptr && !is_sparse_vector_index_type()) {
+    ob_mark_cuvs_if_needed(algo_data_, snap_data_->index_);
+  }
   LOG_INFO("HgraphIndex vector index try init snap data without lock", K(ret), K(type_), K(actual_type));
   return ret;
 }
