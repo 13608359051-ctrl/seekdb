@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Run three isolated observer lifecycles per dataset, retaining logs and failures."""
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -32,6 +33,7 @@ def main():
     parser.add_argument("--out", required=True, type=Path)
     parser.add_argument("--datasets", nargs="+", choices=("D1", "D2", "D3"), default=["D1", "D2", "D3"])
     parser.add_argument("--port", type=int, default=2981)
+    parser.add_argument("--phase-only", action="store_true")
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=False)
     observer, bridge = args.observer.resolve(strict=True), args.bridge.resolve(strict=True)
@@ -75,10 +77,24 @@ def main():
                             time.sleep(1)
                     else:
                         raise RuntimeError("observer readiness timeout")
+                    loaded = {Path(line.split()[-1]).resolve() for line in
+                              Path(f"/proc/{process.pid}/maps").read_text().splitlines()
+                              if "libseekdb_cuvs_bridge.so" in line}
+                    expected_hash = hashlib.sha256(bridge.read_bytes()).hexdigest()
+                    libraries = [{"path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+                                 for path in sorted(loaded)]
+                    (run / "bridge_loaded.json").write_text(json.dumps({
+                        "expected_path": str(bridge), "expected_sha256": expected_hash,
+                        "loaded": libraries}, indent=2))
+                    assert len(libraries) == 1 and libraries[0]["sha256"] == expected_hash, libraries
                     with (run / "bench.log").open("w") as bench_log:
-                        subprocess.run([sys.executable, str(Path(__file__).with_name("bench_build.py")),
-                                        "--rows", str(rows), "--dim", str(dim), "--queries", "100",
-                                        "--trace-file", str(trace), "--out", str(run / "result.json")],
+                        benchmark = [sys.executable, str(Path(__file__).with_name("bench_build.py")),
+                                     "--rows", str(rows), "--dim", str(dim), "--queries", "100",
+                                     "--trace-file", str(trace), "--out", str(run / "result.json")]
+                        if args.phase_only:
+                            benchmark.append("--phase-only")
+                        (run / "bench_command.json").write_text(json.dumps(benchmark))
+                        subprocess.run(benchmark,
                                        env=env, stdout=bench_log, stderr=subprocess.STDOUT,
                                        check=True, timeout=1800)
                     fds = gpu_devices(process.pid)

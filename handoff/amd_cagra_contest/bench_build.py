@@ -8,8 +8,7 @@ The timed region is:
   CREATE VECTOR INDEX ... WITH(lib=cuvs, ...) + first fixed APPROXIMATE query
 This includes lazy CAGRA construction triggered by the first query.
 
-Not yet executed on AMD GPU hardware. Use only as the development harness; the
-organizer's fixed harness is the official score.
+This is a development harness; the organizer's fixed harness is the official score.
 """
 import argparse
 import json
@@ -86,6 +85,8 @@ def main():
     parser.add_argument("--batch", type=int, default=500)
     parser.add_argument("--out", required=True)
     parser.add_argument("--trace-file", default=os.environ.get("OB_VSAG_TRACE_FILE"))
+    parser.add_argument("--phase-only", action="store_true",
+                        help="stop after the first legal GPU query for diagnostic timing probes")
     args = parser.parse_args()
 
     if args.rows < 256:
@@ -160,6 +161,17 @@ def main():
                 "note": "Invalid for GPU scoring: these elapsed times may include CPU fallback.",
             }, indent=2) + "\n")
             raise
+
+    if args.phase_only:
+        result = {"status": "PROFILE_ONLY", "config": vars(args), "timing": {
+            "create_index_sec": create_sec, "first_query_sec": first_query_sec,
+            "build_total_sec": build_total_sec, "first_query_rows": len(first_rows)},
+            "first_query_ids": [row[0] for row in first_rows],
+            "note": "Diagnostic probes only; no recall/throughput validation or performance score."}
+        Path(args.out).write_text(json.dumps(result, indent=2) + "\n")
+        print(json.dumps(result))
+        conn.close()
+        return
 
     approx = {10: [], 100: []}
     query_latencies = {10: [], 100: []}
