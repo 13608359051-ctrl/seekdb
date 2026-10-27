@@ -2,11 +2,16 @@
 
 ## 状态
 
+2026-10-27 云端实测更新：指定冻结源码已编译成功，官方 GPU smoke 全部通过。
+但“先导入、再 CREATE VECTOR INDEX、首查询”的路径在三次独立冷启动中均缺少
+CAGRA build/serve 证据，不能作为有效 GPU 基线成绩。当前先保留诊断与失败数据，
+尚未进入参数优化。见 `results/BASELINE_FINDINGS_20261027.md`。
+
 - 官方规则：已确认，见 `HANDOFF.md` §1。
 - 正式基线：已定位并下载，见 §2。
 - 本机 GPU：**不可用**（无 ROCm/hipVS；Windows 780M 不是可用的 hipVS 环境）。
 - 优化实现：**尚未开始**。
-- GPU 实测：**尚无数字**。
+- GPU 实测：已有 smoke 证据；**尚无满足构建计时边界的有效 GPU 基线数字**。
 - 旧交接包 `hipvs_hnsw_handoff.zip` 基于上游 seekdb，**不适用于本题**，只能作为历史材料。
 
 ## 正式基线（推定冻结）

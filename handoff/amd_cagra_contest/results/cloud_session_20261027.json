@@ -1,0 +1,243 @@
+{
+  "status": "frozen_baseline_offline_gpu_gate_failed_candidate_work_continues",
+  "date_timezone": "2026-10-27 Asia/Shanghai",
+  "baseline_commit": "ad3253a52fbeb3b9fc5b0a097d69f41696d28466",
+  "baseline_tag": "amd-cagra-contest-baseline-v4",
+  "working_branch": "kimi/amd-cagra-opt",
+  "working_head_at_start": "065b5490641196ef95680f08b84b11112a9cdf22",
+  "candidate_commit": null,
+  "instance": {
+    "template": "seekdb-hipvs",
+    "id": "rgapi-hf-25780-cb040cc6",
+    "notebook_url": "https://jupyter.anruicloud.com/instances/rgapi-hf-25780-cb040cc6/lab/tree/seekdb_hipvs_notebook",
+    "credits_available_before_launch": 5,
+    "cost_credits_per_gpu_hour": 1,
+    "platform_auto_delete_hours_observed": 72,
+    "state": "running_user_requested_continue",
+    "gpu_arch": "gfx1100",
+    "rocm": "7.2.4",
+    "cpu_quota_cores": 16,
+    "memory_limit_bytes": 59055800320,
+    "gpu_nodes": [
+      "/dev/kfd",
+      "/dev/dri/renderD128"
+    ],
+    "hipvs_headers_and_library_present": true,
+    "hipvs_commit": null,
+    "credits_consumed_last_observed": 2,
+    "gpu_model_reported": "AMD Radeon Graphics",
+    "driver": "6.16.13",
+    "hipvs_library_sha256": "b63211897276e0a6911bb534fe77c8b0b59f31c50af1df2f108845f06ad46ebf"
+  },
+  "source_upload": {
+    "kind": "shallow Git source snapshot, no precompiled runtime",
+    "sha256": "a3f1e976b6beb34960f91ba62c34cb87e0aab5652fc3f29022c43070238048a0",
+    "remote_sha256_verified": true,
+    "cloud_source_root": "/workspace/amd-cagra-run/source/baseline"
+  },
+  "evidence_root_cloud": "/workspace/amd-cagra-run",
+  "compile_command": "bash build.sh release -DNEED_PARSER_CACHE=OFF -DCARGO=/workspace/amd-cagra-run/rust-toolchain/bin/cargo -DOB_BUILD_CUVS=ON -DOB_BUILD_CUVS_TRACE=ON -DCUVS_BRIDGE_LIB=/workspace/amd-cagra-run/bridge/libseekdb_cuvs_bridge.so --make -j8",
+  "observed_failures": [
+    {
+      "stage": "cloud_git_clone",
+      "reason": "GnuTLS recv error (-110)",
+      "resolution": "uploaded SHA256-verified local Git snapshot"
+    },
+    {
+      "stage": "source_snapshot_checkout",
+      "reason": "ZIP omitted empty .git/refs directories",
+      "resolution": "restored empty refs directories; verified repository path and baseline HEAD"
+    },
+    {
+      "stage": "dependency_initialization",
+      "reason": "rpm2cpio and cpio missing",
+      "resolution": "installed from Ubuntu apt; dependency initialization restarted"
+    },
+    {
+      "stage": "dependency_initialization",
+      "reason": "obshell RPM 404",
+      "resolution": "compile after SDK init without --init; no dependency-list source change"
+    },
+    {
+      "stage": "toolchain",
+      "reason": "cargo absent; cloud Rust mirrors 403",
+      "resolution": "installed SHA-verified official Rust 1.97.1 standalone compiler and locked vendored sources"
+    },
+    {
+      "stage": "upload",
+      "reason": "Rust ZIP truncated",
+      "resolution": "verified matching prefix, transferred missing tail, verified full archive before use"
+    },
+    {
+      "stage": "parser",
+      "reason": "missing python alias, parser-cache MD5 and m4",
+      "resolution": "task-local python link, existing NEED_PARSER_CACHE=OFF option and apt m4"
+    },
+    {
+      "stage": "offline_first_query",
+      "reason": "three fresh D1 runs have no cuvs_build/cuvs_serve and no GPU fd; default-layout control also fails three times",
+      "resolution": "not scored; diagnose candidate-side snapshot GPU-state restoration"
+    },
+    {
+      "stage": "evidence_export",
+      "reason": "followed observer executable symlinks; bridge stderr was in run/log/seekdb.log",
+      "resolution": "stopped initial export, excluded symlinks/ELF, collected actual logs, verified final ZIP and SHA"
+    },
+    {
+      "stage": "evidence_download",
+      "reason": "generic file-link download returned nginx 403",
+      "resolution": "Jupyter native ZIP Download succeeded; local/cloud SHA matched"
+    }
+  ],
+  "runs": [
+    {
+      "run": "D1_r1",
+      "status": "FAIL",
+      "timing_cpu_fallback_only": {
+        "create_index_sec": 2.438362166285515,
+        "first_query_sec": 0.013535680249333382,
+        "build_total_sec": 2.45189992710948
+      },
+      "first_query_ids": [
+        1288,
+        5497,
+        3728,
+        4446,
+        2306,
+        5179,
+        1891,
+        9227,
+        1672,
+        1172
+      ],
+      "trace_counts": {
+        "create_dense": 2,
+        "add_dense": 10000,
+        "delete_index": 1,
+        "fdeserialize": 1,
+        "knn_simple": 1
+      },
+      "phase_counters": {},
+      "gpu_fds": {
+        "pid": 11844,
+        "devices": []
+      }
+    },
+    {
+      "run": "D1_r2",
+      "status": "FAIL",
+      "timing_cpu_fallback_only": {
+        "create_index_sec": 2.4363746158778667,
+        "first_query_sec": 0.011499438434839249,
+        "build_total_sec": 2.447876075282693
+      },
+      "first_query_ids": [
+        1288,
+        5497,
+        3728,
+        4446,
+        2306,
+        5179,
+        1891,
+        9227,
+        1672,
+        1172
+      ],
+      "trace_counts": {
+        "create_dense": 2,
+        "add_dense": 10000,
+        "delete_index": 1,
+        "fdeserialize": 1,
+        "knn_simple": 1
+      },
+      "phase_counters": {},
+      "gpu_fds": {
+        "pid": 11930,
+        "devices": []
+      }
+    },
+    {
+      "run": "D1_r3",
+      "status": "FAIL",
+      "timing_cpu_fallback_only": {
+        "create_index_sec": 2.4412173200398684,
+        "first_query_sec": 0.012573722749948502,
+        "build_total_sec": 2.4537927452474833
+      },
+      "first_query_ids": [
+        1288,
+        5497,
+        3728,
+        4446,
+        2306,
+        5179,
+        1891,
+        9227,
+        1672,
+        1172
+      ],
+      "trace_counts": {
+        "create_dense": 2,
+        "add_dense": 10000,
+        "delete_index": 1,
+        "fdeserialize": 1,
+        "knn_simple": 1
+      },
+      "phase_counters": {},
+      "gpu_fds": {
+        "pid": 12015,
+        "devices": []
+      }
+    }
+  ],
+  "median": null,
+  "phase_breakdown": {
+    "D1": {
+      "create_index_sec": 2.441118162125349,
+      "first_query_sec": 0.012629473581910133,
+      "build_total_sec": 2.453749565407634,
+      "valid_gpu_build_sec": null,
+      "phase_vsag_call_sec": 1.963622428,
+      "phase_buffer_call_sec": 0.0096607
+    },
+    "D2": {
+      "create_index_sec": 16.19406771659851,
+      "first_query_sec": 0.03763585165143013,
+      "build_total_sec": 16.231705700978637,
+      "valid_gpu_build_sec": null,
+      "phase_vsag_call_sec": 14.681447152,
+      "phase_buffer_call_sec": 0.048507145
+    },
+    "D3": {
+      "create_index_sec": 23.639053849503398,
+      "first_query_sec": 0.049804311245679855,
+      "build_total_sec": 23.688921140506864,
+      "valid_gpu_build_sec": null,
+      "phase_vsag_call_sec": 21.797842701,
+      "phase_buffer_call_sec": 0.091772743
+    }
+  },
+  "comparison": {
+    "recall10_delta": null,
+    "recall100_delta": null,
+    "query_qps_ratio": null,
+    "build_speedup": null
+  },
+  "gates": {
+    "source_build": true,
+    "gpu_cagra_smoke": true,
+    "gpu_cagra_offline": false,
+    "recall": null,
+    "query": null
+  },
+  "note": "No valid frozen GPU build score or candidate speedup. User requested continuing candidate repair/experiments while keeping the instance running.",
+  "baseline_result": "cloud_20261027/collected_summary.json",
+  "evidence_backup": {
+    "path": "E:/OceanBase2026/amd-cagra-cloud-evidence-20261027.zip",
+    "bytes": 48307831,
+    "sha256": "9f595459df98e6ecc6d606b13f1ed17acd28d57a96e88f1002e8c2a0a0623d7d",
+    "zip_crc_verified": true,
+    "no_elf_binaries": true,
+    "cloud_local_hash_match": true
+  }
+}

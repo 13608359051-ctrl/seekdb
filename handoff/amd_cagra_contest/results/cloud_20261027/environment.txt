@@ -1,0 +1,43 @@
+2026-10-27T14:28:40+00:00
+Linux j-6sht7ka2dqjkcidye4mpxob6jm 6.8.0-79-generic #79-Ubuntu SMP PREEMPT_DYNAMIC Tue Aug 12 14:42:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+128
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi        82Gi       209Gi       185Mi       215Gi       420Gi
+Swap:             0B          0B          0B
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/loop1       98G  398M   93G   1% /workspace
+
+
+======================================== ROCm System Management Interface ========================================
+================================================== Concise Info ==================================================
+Device  Node  IDs              Temp    Power  Partitions          SCLK  MCLK   Fan    Perf  PwrCap  VRAM%  GPU%  
+[3m              (DID,     GUID)  (Edge)  (Avg)  (Mem, Compute, ID)                                                 [0m
+==================================================================================================================
+0       2     0x744b,   6853   23.0°C  5.0W   N/A, N/A, 0         0Mhz  96Mhz  20.0%  auto  241.0W  0%     0%    
+==================================================================================================================
+============================================== End of ROCm SMI Log ===============================================
+HIP version: 7.2.53211-97f5574fe2
+AMD clang version 22.0.0git (https://github.com/RadeonOpenCompute/llvm-project roc-7.2.4 26084 f58b06dce1f9c15707c5f808fd002e18c2accf7e)
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /opt/rocm-7.2.4/lib/llvm/bin
+Configuration file: /opt/rocm-7.2.4/lib/llvm/bin/clang++.cfg
+crw-rw---- 1 root 993 226, 128 Oct 27 14:26 /dev/dri/renderD128
+crw-rw---- 1 root 993 234,   0 Oct 27 14:26 /dev/kfd
+drwxr-xr-x  1 root root  4096 Aug 17 08:08 /opt/hipvs
+drwxr-xr-x  3 root root  4096 Sep 15 02:45 /opt/seekdb-notebook
+-rw-r-----  1 root root  2087 Oct 27 14:26 /workspace/AGENTS.md
+-rw-r-----  1 root root 11357 Oct 27 14:26 /workspace/LICENSE
+-rw-r-----  1 root root    10 Oct 27 14:26 /workspace/README.md
+drwxr-xr-x  2 root root  4096 Oct 27 14:28 /workspace/amd-cagra-run
+drwxr-x---  5 root root  4096 Oct 27 14:26 /workspace/blogs
+drwxr-x---  2 root root  4096 Oct 27 14:26 /workspace/comfyui_ltx_notebook
+drwxr-x---  3 root root  4096 Oct 27 14:26 /workspace/comfyui_text2viode
+drwxr-x---  3 root root  4096 Oct 27 14:26 /workspace/dockerfile_list
+drwxr-x---  6 root root  4096 Oct 27 14:26 /workspace/hunyuanOCRv1.5_notebook
+drwxr-x---  2 root root  4096 Oct 27 14:26 /workspace/lemonade_notebook
+drwxr-xr-x  2 root root 16384 Oct 27 14:26 /workspace/lost+found
+drwxr-x---  9 root root  4096 Oct 27 14:26 /workspace/opencv_amd_end2end
+drwxr-x---  4 root root  4096 Oct 27 14:26 /workspace/opencv_amd_gpu
+drwxr-x---  5 root root  4096 Oct 27 14:27 /workspace/seekdb_hipvs_notebook
+drwxr-x--- 13 root root  4096 Oct 27 14:26 /workspace/ultralytics_yolo26

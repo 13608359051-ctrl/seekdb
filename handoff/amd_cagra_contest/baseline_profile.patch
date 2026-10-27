@@ -1,0 +1,142 @@
+--- a/src/oblib/lib/vector/ob_vsag_adaptor.cpp
++++ b/src/oblib/lib/vector/ob_vsag_adaptor.cpp
+@@ -25,6 +25,8 @@
+ #include <cstdio>
+ #include <cstring>
+ #include <pthread.h>
++#include <atomic>
++#include <chrono>
+ #include "vsag/vsag.h"
+ #include "vsag/errors.h"
+ #include "vsag/dataset.h"
+@@ -80,6 +82,20 @@
+ static std::map<void *, ObCuvsEntry *> g_ob_cuvs_reg;
+ static std::mutex g_ob_cuvs_marked_mu;
+ static std::set<void *> g_ob_cuvs_marked;  // handles of lib=cuvs indexes (marked by the plugin)
++
++// Diagnostic only: cumulative call durations may overlap across build threads.
++static std::atomic<long> profile_vsag_ns{0}, profile_vsag_calls{0};
++static std::atomic<long> profile_buffer_ns{0}, profile_buffer_calls{0};
++static long profile_now_ns() {
++  return std::chrono::duration_cast<std::chrono::nanoseconds>(
++      std::chrono::steady_clock::now().time_since_epoch()).count();
++}
++static void profile_record(std::atomic<long> &ns, std::atomic<long> &calls, long start) {
++  if (start != 0) {
++    ns.fetch_add(profile_now_ns() - start, std::memory_order_relaxed);
++    calls.fetch_add(1, std::memory_order_relaxed);
++  }
++}
+ // GPU backend available? (used by the explicit dbms_vector.batch_knn path)
+ static inline bool ob_cuvs_enabled() {
+ #ifdef OB_BUILD_CUVS
+@@ -134,6 +150,7 @@
+ static void ob_cuvs_add(void *key, const float *vectors, const int64_t *ids,
+                         int dim, int size) {
+   if (vectors == nullptr || ids == nullptr || dim <= 0 || size <= 0) { return; }
++  const long profile_start = profile_now_ns();
+   std::lock_guard<std::mutex> guard(g_ob_cuvs_mu);
+   ObCuvsEntry *&slot = g_ob_cuvs_reg[key];
+   if (slot == nullptr) { slot = new ObCuvsEntry(); slot->dim_ = dim; }
+@@ -142,6 +159,7 @@
+   slot->buf_vecs_.insert(slot->buf_vecs_.end(), vectors,
+                          vectors + static_cast<size_t>(dim) * size);
+   slot->buf_ids_.insert(slot->buf_ids_.end(), ids, ids + size);
++  profile_record(profile_buffer_ns, profile_buffer_calls, profile_start);
+ }
+ static void ob_cuvs_erase(void *key) {
+   { std::lock_guard<std::mutex> mg(g_ob_cuvs_marked_mu); g_ob_cuvs_marked.erase(key); }
+@@ -470,7 +488,9 @@
+ {
+   int ret = OB_SUCCESS;
+   try {
++    const long profile_start = ob_cuvs_marked(this) ? profile_now_ns() : 0;
+     tl::expected<std::vector<int64_t>, Error> result = index_->Build(base);
++    profile_record(profile_vsag_ns, profile_vsag_calls, profile_start);
+     if (result.has_value()) {
+     } else {
+       ret = vsag_errcode2ob(result.error().type);
+@@ -493,7 +513,9 @@
+ int HnswIndexHandler::add_index(const vsag::DatasetPtr &incremental)
+ {
+   int ret = OB_SUCCESS;
+-  tl::expected<std::vector<int64_t>, Error> result = index_->Add(incremental);
++  const long profile_start = ob_cuvs_marked(this) ? profile_now_ns() : 0;
++    tl::expected<std::vector<int64_t>, Error> result = index_->Add(incremental);
++    profile_record(profile_vsag_ns, profile_vsag_calls, profile_start);
+   if (result.has_value()) {
+     LOG_DEBUG("add index success", K(get_index_number()));
+   } else {
+@@ -1448,6 +1470,9 @@
+ {
+   int ret = OB_SUCCESS;
+   ob_vsag_trace("knn_simple", (const void*)index_handler, (long)(dim), (long)(topk));
++  ob_vsag_trace("phase_vsag", index_handler, profile_vsag_ns.load(), profile_vsag_calls.load());
++  ob_vsag_trace("phase_buffer", index_handler, profile_buffer_ns.load(), profile_buffer_calls.load());
++  ob_vsag_trace("phase_marked", index_handler, ob_cuvs_marked(index_handler), 0);
+   if (index_handler == nullptr || query_vector == nullptr) {
+     ret = OB_INVALID_ARGUMENT;
+     LOG_WARN("[OBVSAG] null pointer addr", KP(index_handler), KP(query_vector));
+@@ -1497,6 +1522,9 @@
+ {
+   int ret = OB_SUCCESS;
+   ob_vsag_trace("knn_iterctx", (const void*)index_handler, (long)(dim), (long)(topk));
++  ob_vsag_trace("phase_vsag", index_handler, profile_vsag_ns.load(), profile_vsag_calls.load());
++  ob_vsag_trace("phase_buffer", index_handler, profile_buffer_ns.load(), profile_buffer_calls.load());
++  ob_vsag_trace("phase_marked", index_handler, ob_cuvs_marked(index_handler), 0);
+   if (index_handler == nullptr || query_vector == nullptr) {
+     ret = OB_INVALID_ARGUMENT;
+     LOG_WARN("[OBVSAG] null pointer addr", K(index_handler), K(query_vector));
+--- a/tools/hipvs_bridge/seekdb_cuvs_bridge.c
++++ b/tools/hipvs_bridge/seekdb_cuvs_bridge.c
+@@ -10,6 +10,12 @@
+ #endif
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <time.h>
++
++static long profile_now_ns(void) {
++  struct timespec t; clock_gettime(CLOCK_MONOTONIC, &t);
++  return t.tv_sec * 1000000000L + t.tv_nsec;
++}
+ 
+ typedef struct {
+   cuvsResources_t        res;
+@@ -20,6 +26,8 @@
+ 
+ void* seekdb_cuvs_build(const float* base, long n, long dim)
+ {
++  const long profile_start = profile_now_ns();
++  long profile_submitted = 0;
+   sk_cuvs_index* h = (sk_cuvs_index*)calloc(1, sizeof(*h));
+   if (!h) return NULL;
+   if (cuvsResourcesCreate(&h->res) != CUVS_SUCCESS) { free(h); return NULL; }
+@@ -38,6 +46,11 @@
+   h->ip->nn_descent_niter = 100;
+   if (cuvsCagraIndexCreate(&h->idx)      != CUVS_SUCCESS) goto fail_ip;
+   if (cuvsCagraBuild(h->res, h->ip, &dset, h->idx) != CUVS_SUCCESS) goto fail_idx;
++  profile_submitted = profile_now_ns();
++  if (cuvsStreamSync(h->res) != CUVS_SUCCESS) goto fail_idx;
++  fprintf(stderr, "phase_cagra_build total_ns=%ld submit_ns=%ld sync_ns=%ld n=%ld dim=%ld\n",
++          profile_now_ns() - profile_start, profile_submitted - profile_start,
++          profile_now_ns() - profile_submitted, n, dim);
+   h->n = n; h->dim = dim;
+   return h;
+ 
+@@ -51,6 +64,7 @@
+ int seekdb_cuvs_search(void* handle, const float* query, long nq, long topk,
+                        unsigned int* out_ids, float* out_dist)
+ {
++  const long profile_start = profile_now_ns();
+   sk_cuvs_index* h = (sk_cuvs_index*)handle;
+   if (!h) return 1;
+   int rc = 0;
+@@ -84,6 +98,8 @@
+   if (nd) cuvsRMMFree(h->res, nd, sizeof(unsigned)*nq*topk);
+   if (qd) cuvsRMMFree(h->res, qd, sizeof(float)*nq*h->dim);
+   if (rc) fprintf(stderr, "[seekdb_cuvs] search rc=%d: %s\n", rc, cuvsGetLastErrorText());
++  fprintf(stderr, "phase_cagra_search total_ns=%ld nq=%ld k=%ld rc=%d\n",
++          profile_now_ns() - profile_start, nq, topk, rc);
+   return rc;
+ }
+ 

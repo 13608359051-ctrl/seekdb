@@ -1,0 +1,887 @@
+{
+  "baseline_commit": "ad3253a52fbeb3b9fc5b0a097d69f41696d28466",
+  "valid_gpu_baseline": false,
+  "candidate_comparison": null,
+  "experiments": {
+    "baseline-repro-v2": {
+      "runs": {
+        "D1": [
+          {
+            "run": "D1_r1",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 2.438362166285515,
+              "first_query_sec": 0.013535680249333382,
+              "build_total_sec": 2.45189992710948
+            },
+            "first_query_ids": [
+              1288,
+              5497,
+              3728,
+              4446,
+              2306,
+              5179,
+              1891,
+              9227,
+              1672,
+              1172
+            ],
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "knn_simple": 1
+            },
+            "phase_counters": {},
+            "gpu_fds": {
+              "pid": 11844,
+              "devices": []
+            }
+          },
+          {
+            "run": "D1_r2",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 2.4363746158778667,
+              "first_query_sec": 0.011499438434839249,
+              "build_total_sec": 2.447876075282693
+            },
+            "first_query_ids": [
+              1288,
+              5497,
+              3728,
+              4446,
+              2306,
+              5179,
+              1891,
+              9227,
+              1672,
+              1172
+            ],
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "knn_simple": 1
+            },
+            "phase_counters": {},
+            "gpu_fds": {
+              "pid": 11930,
+              "devices": []
+            }
+          },
+          {
+            "run": "D1_r3",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 2.4412173200398684,
+              "first_query_sec": 0.012573722749948502,
+              "build_total_sec": 2.4537927452474833
+            },
+            "first_query_ids": [
+              1288,
+              5497,
+              3728,
+              4446,
+              2306,
+              5179,
+              1891,
+              9227,
+              1672,
+              1172
+            ],
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "knn_simple": 1
+            },
+            "phase_counters": {},
+            "gpu_fds": {
+              "pid": 12015,
+              "devices": []
+            }
+          }
+        ]
+      },
+      "median_diagnostic_only": {
+        "D1": {
+          "create_index_sec": 2.438362166285515,
+          "first_query_sec": 0.012573722749948502,
+          "build_total_sec": 2.45189992710948,
+          "valid_gpu_build_sec": null
+        }
+      }
+    },
+    "baseline-default-layout": {
+      "runs": {
+        "D1": [
+          {
+            "run": "D1_r1",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 2.948440248146653,
+              "first_query_sec": 0.012698670849204063,
+              "build_total_sec": 2.961140690371394
+            },
+            "first_query_ids": [
+              1288,
+              5497,
+              3728,
+              4446,
+              2306,
+              5179,
+              1891,
+              9227,
+              1672,
+              1172
+            ],
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "knn_simple": 1
+            },
+            "phase_counters": {},
+            "gpu_fds": {
+              "pid": 12573,
+              "devices": []
+            }
+          },
+          {
+            "run": "D1_r2",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 2.9485713094472885,
+              "first_query_sec": 0.012934770435094833,
+              "build_total_sec": 2.961508307605982
+            },
+            "first_query_ids": [
+              1288,
+              5497,
+              3728,
+              4446,
+              2306,
+              5179,
+              1891,
+              9227,
+              1672,
+              1172
+            ],
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "knn_simple": 1
+            },
+            "phase_counters": {},
+            "gpu_fds": {
+              "pid": 12662,
+              "devices": []
+            }
+          },
+          {
+            "run": "D1_r3",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 2.847850013524294,
+              "first_query_sec": 0.012680023908615112,
+              "build_total_sec": 2.860533045604825
+            },
+            "first_query_ids": [
+              1288,
+              5497,
+              3728,
+              4446,
+              2306,
+              5179,
+              1891,
+              9227,
+              1672,
+              1172
+            ],
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "knn_simple": 1
+            },
+            "phase_counters": {},
+            "gpu_fds": {
+              "pid": 12752,
+              "devices": []
+            }
+          }
+        ]
+      },
+      "median_diagnostic_only": {
+        "D1": {
+          "create_index_sec": 2.948440248146653,
+          "first_query_sec": 0.012698670849204063,
+          "build_total_sec": 2.961140690371394,
+          "valid_gpu_build_sec": null
+        }
+      }
+    },
+    "baseline-profile-v1": {
+      "runs": {
+        "D1": [
+          {
+            "run": "D1_r1",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 2.5409135092049837,
+              "first_query_sec": 0.012772440910339355,
+              "build_total_sec": 2.553688572719693
+            },
+            "first_query_ids": [
+              1288,
+              5497,
+              3728,
+              4446,
+              2306,
+              5179,
+              1891,
+              9227,
+              1672,
+              1172
+            ],
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1
+            },
+            "phase_counters": {
+              "phase_vsag": {
+                "a": 1982578802,
+                "b": 10000
+              },
+              "phase_buffer": {
+                "a": 9872617,
+                "b": 10000
+              },
+              "phase_marked": {
+                "a": 0,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 12940,
+              "devices": []
+            }
+          },
+          {
+            "run": "D1_r2",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 2.440450621768832,
+              "first_query_sec": 0.012225620448589325,
+              "build_total_sec": 2.4526777490973473
+            },
+            "first_query_ids": [
+              1288,
+              5497,
+              3728,
+              4446,
+              2306,
+              5179,
+              1891,
+              9227,
+              1672,
+              1172
+            ],
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1
+            },
+            "phase_counters": {
+              "phase_vsag": {
+                "a": 1940756317,
+                "b": 10000
+              },
+              "phase_buffer": {
+                "a": 9660700,
+                "b": 10000
+              },
+              "phase_marked": {
+                "a": 0,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 13027,
+              "devices": []
+            }
+          },
+          {
+            "run": "D1_r3",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 2.441118162125349,
+              "first_query_sec": 0.012629473581910133,
+              "build_total_sec": 2.453749565407634
+            },
+            "first_query_ids": [
+              1288,
+              5497,
+              3728,
+              4446,
+              2306,
+              5179,
+              1891,
+              9227,
+              1672,
+              1172
+            ],
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1
+            },
+            "phase_counters": {
+              "phase_vsag": {
+                "a": 1963622428,
+                "b": 10000
+              },
+              "phase_buffer": {
+                "a": 9644455,
+                "b": 10000
+              },
+              "phase_marked": {
+                "a": 0,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 13113,
+              "devices": []
+            }
+          }
+        ],
+        "D2": [
+          {
+            "run": "D2_r1",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 16.205137053504586,
+              "first_query_sec": 0.03835817240178585,
+              "build_total_sec": 16.243502965196967
+            },
+            "first_query_ids": [
+              13052,
+              5847,
+              22422,
+              1672,
+              32893,
+              731,
+              27826,
+              42032,
+              32867,
+              35631
+            ],
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1
+            },
+            "phase_counters": {
+              "phase_vsag": {
+                "a": 14681447152,
+                "b": 50000
+              },
+              "phase_buffer": {
+                "a": 47721256,
+                "b": 50000
+              },
+              "phase_marked": {
+                "a": 0,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 13201,
+              "devices": []
+            }
+          },
+          {
+            "run": "D2_r2",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 16.19406771659851,
+              "first_query_sec": 0.03763585165143013,
+              "build_total_sec": 16.231705700978637
+            },
+            "first_query_ids": [
+              13052,
+              5847,
+              22422,
+              1672,
+              32893,
+              731,
+              27826,
+              42032,
+              32867,
+              35631
+            ],
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1
+            },
+            "phase_counters": {
+              "phase_vsag": {
+                "a": 14760219308,
+                "b": 50000
+              },
+              "phase_buffer": {
+                "a": 48507145,
+                "b": 50000
+              },
+              "phase_marked": {
+                "a": 0,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 13315,
+              "devices": []
+            }
+          },
+          {
+            "run": "D2_r3",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 16.100501155480742,
+              "first_query_sec": 0.03719721734523773,
+              "build_total_sec": 16.13770047388971
+            },
+            "first_query_ids": [
+              13052,
+              5847,
+              22422,
+              1672,
+              32893,
+              731,
+              27826,
+              42032,
+              32867,
+              35631
+            ],
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1
+            },
+            "phase_counters": {
+              "phase_vsag": {
+                "a": 14590759929,
+                "b": 50000
+              },
+              "phase_buffer": {
+                "a": 48598462,
+                "b": 50000
+              },
+              "phase_marked": {
+                "a": 0,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 13433,
+              "devices": []
+            }
+          }
+        ],
+        "D3": [
+          {
+            "run": "D3_r1",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 24.130914077162743,
+              "first_query_sec": 0.049804311245679855,
+              "build_total_sec": 24.180719977244735
+            },
+            "first_query_ids": [
+              8094,
+              19964,
+              8344,
+              21511,
+              21119,
+              11234,
+              3569,
+              3644,
+              31348,
+              29772
+            ],
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1
+            },
+            "phase_counters": {
+              "phase_vsag": {
+                "a": 22248849718,
+                "b": 50000
+              },
+              "phase_buffer": {
+                "a": 101232792,
+                "b": 50000
+              },
+              "phase_marked": {
+                "a": 0,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 13545,
+              "devices": []
+            }
+          },
+          {
+            "run": "D3_r2",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 23.639053849503398,
+              "first_query_sec": 0.04985305853188038,
+              "build_total_sec": 23.688921140506864
+            },
+            "first_query_ids": [
+              8094,
+              19964,
+              8344,
+              21511,
+              21119,
+              11234,
+              3569,
+              3644,
+              31348,
+              29772
+            ],
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1
+            },
+            "phase_counters": {
+              "phase_vsag": {
+                "a": 21735002881,
+                "b": 50000
+              },
+              "phase_buffer": {
+                "a": 91772743,
+                "b": 50000
+              },
+              "phase_marked": {
+                "a": 0,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 13662,
+              "devices": []
+            }
+          },
+          {
+            "run": "D3_r3",
+            "status": "FAIL",
+            "timing_cpu_fallback_only": {
+              "create_index_sec": 23.627940829843283,
+              "first_query_sec": 0.04620013199746609,
+              "build_total_sec": 23.674157923087478
+            },
+            "first_query_ids": [
+              8094,
+              19964,
+              8344,
+              21511,
+              21119,
+              11234,
+              3569,
+              3644,
+              31348,
+              29772
+            ],
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1
+            },
+            "phase_counters": {
+              "phase_vsag": {
+                "a": 21797842701,
+                "b": 50000
+              },
+              "phase_buffer": {
+                "a": 84867222,
+                "b": 50000
+              },
+              "phase_marked": {
+                "a": 0,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 13780,
+              "devices": []
+            }
+          }
+        ]
+      },
+      "median_diagnostic_only": {
+        "D1": {
+          "create_index_sec": 2.441118162125349,
+          "first_query_sec": 0.012629473581910133,
+          "build_total_sec": 2.453749565407634,
+          "valid_gpu_build_sec": null,
+          "phase_vsag_call_sec": 1.963622428,
+          "phase_buffer_call_sec": 0.0096607
+        },
+        "D2": {
+          "create_index_sec": 16.19406771659851,
+          "first_query_sec": 0.03763585165143013,
+          "build_total_sec": 16.231705700978637,
+          "valid_gpu_build_sec": null,
+          "phase_vsag_call_sec": 14.681447152,
+          "phase_buffer_call_sec": 0.048507145
+        },
+        "D3": {
+          "create_index_sec": 23.639053849503398,
+          "first_query_sec": 0.049804311245679855,
+          "build_total_sec": 23.688921140506864,
+          "valid_gpu_build_sec": null,
+          "phase_vsag_call_sec": 21.797842701,
+          "phase_buffer_call_sec": 0.091772743
+        }
+      }
+    }
+  },
+  "numpy": "2.4.6",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "datasets": {
+    "D1": {
+      "rows": 10000,
+      "dim": 128,
+      "queries": 100,
+      "seed": 42,
+      "base_f32_sha256": "a3b2b7a31dc716a1d99aba00aaa9fa639c11075ca3236293851c0af1059f48d8",
+      "query_f32_sha256": "9f6e4025d7fa84d982b073f3bfd4dc9dba989a4bb307d56eb8f853987675e23c"
+    },
+    "D2": {
+      "rows": 50000,
+      "dim": 128,
+      "queries": 100,
+      "seed": 42,
+      "base_f32_sha256": "4380ca01e0fec89aad46e90aabb9bf6122bf1eb9ac453674f8e182654ab1ab89",
+      "query_f32_sha256": "e044685bf9472847525c07e8556fa40615d610af340f391e4f5a76c343160ed5"
+    },
+    "D3": {
+      "rows": 50000,
+      "dim": 256,
+      "queries": 100,
+      "seed": 42,
+      "base_f32_sha256": "6b2408fa50c5b5a99cb1c1329b81d64f691c3e1ec846e38c024e0608cf43afd3",
+      "query_f32_sha256": "8dcde314db49f13d243e204d1ef2d2f12616a201269e17379cff8d4482de1db0"
+    }
+  },
+  "limitations": [
+    "Cumulative VSAG/buffer call durations may overlap across threads; they are not an additive wall-clock partition.",
+    "Offline CREATE INDEX failed the GPU gate; CPU fallback elapsed times are not GPU scores.",
+    "The hipVS source commit in the supplied image could not be verified."
+  ],
+  "smoke-evidence-20261027a": {
+    "cases": [
+      {
+        "detail": "build=1 serve=1",
+        "name": "cuvs_l2_route",
+        "status": "PASS"
+      },
+      {
+        "detail": "cuvs_markers=0",
+        "name": "vsag_cpu_route",
+        "status": "PASS"
+      },
+      {
+        "detail": "cosine and inner_product rejected",
+        "name": "ddl_non_l2",
+        "status": "PASS"
+      },
+      {
+        "detail": "n=400 serve=0 exact_match=1",
+        "name": "freshness_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "n=700 build=1 serve=1",
+        "name": "freshness_rebuild",
+        "status": "PASS"
+      },
+      {
+        "detail": "serve=0 exact_match=1",
+        "name": "filter_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "serve=0 exact_match=1 deleted_absent=1",
+        "name": "delete_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "trace=1 rows=1000 recall=1.0000",
+        "name": "batch_knn",
+        "status": "PASS"
+      },
+      {
+        "detail": "trace=1 rows=10000 recall=1.0000",
+        "name": "batch_knn_top100",
+        "status": "PASS"
+      },
+      {
+        "detail": "observer opened /dev/dri/renderD128 and /dev/kfd",
+        "name": "gpu_fd",
+        "status": "PASS"
+      },
+      {
+        "detail": "serve=0 exact_match=1 observer_alive=1",
+        "name": "gpu_unavailable_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "all observers stopped and ports closed",
+        "name": "cleanup",
+        "status": "PASS"
+      }
+    ],
+    "status": "PASS"
+  },
+  "profile-smoke-evidence-20261027": {
+    "cases": [
+      {
+        "detail": "build=1 serve=1",
+        "name": "cuvs_l2_route",
+        "status": "PASS"
+      },
+      {
+        "detail": "cuvs_markers=0",
+        "name": "vsag_cpu_route",
+        "status": "PASS"
+      },
+      {
+        "detail": "cosine and inner_product rejected",
+        "name": "ddl_non_l2",
+        "status": "PASS"
+      },
+      {
+        "detail": "n=400 serve=0 exact_match=1",
+        "name": "freshness_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "n=700 build=1 serve=1",
+        "name": "freshness_rebuild",
+        "status": "PASS"
+      },
+      {
+        "detail": "serve=0 exact_match=1",
+        "name": "filter_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "serve=0 exact_match=1 deleted_absent=1",
+        "name": "delete_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "trace=1 rows=1000 recall=1.0000",
+        "name": "batch_knn",
+        "status": "PASS"
+      },
+      {
+        "detail": "trace=1 rows=10000 recall=1.0000",
+        "name": "batch_knn_top100",
+        "status": "PASS"
+      },
+      {
+        "detail": "observer opened /dev/dri/renderD128 and /dev/kfd",
+        "name": "gpu_fd",
+        "status": "PASS"
+      },
+      {
+        "detail": "serve=0 exact_match=1 observer_alive=1",
+        "name": "gpu_unavailable_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "all observers stopped and ports closed",
+        "name": "cleanup",
+        "status": "PASS"
+      }
+    ],
+    "status": "PASS"
+  },
+  "profile_cagra_samples": [
+    "phase_cagra_build total_ns=719460422 submit_ns=719448872 sync_ns=11590 n=300 dim=128",
+    "phase_cagra_search total_ns=201031941 nq=1 k=10 rc=0",
+    "phase_cagra_build total_ns=2490445332 submit_ns=2490444602 sync_ns=750 n=700 dim=128",
+    "phase_cagra_search total_ns=91507506 nq=1 k=10 rc=0",
+    "phase_cagra_search total_ns=6837004 nq=1 k=10 rc=0",
+    "phase_cagra_build total_ns=5490052968 submit_ns=5490052228 sync_ns=760 n=10000 dim=128",
+    "phase_cagra_search total_ns=100194895 nq=100 k=10 rc=0",
+    "phase_cagra_build total_ns=7512884589 submit_ns=7512883559 sync_ns=1060 n=10000 dim=128",
+    "phase_cagra_search total_ns=5285046 nq=100 k=100 rc=0"
+  ],
+  "source_head": "ad3253a52fbeb3b9fc5b0a097d69f41696d28466",
+  "hipvs_library_sha256": "b63211897276e0a6911bb534fe77c8b0b59f31c50af1df2f108845f06ad46ebf",
+  "profile_patch_sha256": "fcb5c6601418245aa4bb6ab9abc0f36195609bc73d252cc54c3dcb3b6a262262"
+}

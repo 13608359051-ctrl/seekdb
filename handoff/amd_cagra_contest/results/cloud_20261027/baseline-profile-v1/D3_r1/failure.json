@@ -1,0 +1,1 @@
+{"error": "Command '['/opt/venv/bin/python3', '/workspace/amd-cagra-run/bench_build.py', '--rows', '50000', '--dim', '256', '--queries', '100', '--trace-file', '/workspace/amd-cagra-run/baseline-profile-v1/D3_r1/trace.log', '--out', '/workspace/amd-cagra-run/baseline-profile-v1/D3_r1/result.json']' returned non-zero exit status 1."}

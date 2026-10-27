@@ -115,6 +115,10 @@ smoke 失败时先解决，不要开始性能调参。
 
 ## 7. 构建性能测量
 
+**2026-10-27 已发现冻结 v4 的离线建索引路径缺陷。** 官方 smoke 使用“建表时声明索引、
+随后插入”，不能证明下面的“先导入、再建索引”路径会走 CAGRA。必须核验首查询的新 trace；
+当前三次冷启动均在此处失败。禁止用 CPU 回退耗时计算构建加速，详见本目录结果报告。
+
 基线/候选使用同一套脚本、同一数据、同一参数。每轮：
 
 1. 销毁 base-dir，启动新 observer；
@@ -133,11 +137,17 @@ smoke 失败时先解决，不要开始性能调参。
 ```bash
 python3 handoff/amd_cagra_contest/bench_build.py \
   --rows 50000 --dim 128 --queries 100 --first-k 10 --lib cuvs \
+  --trace-file /workspace/results/obvsag-trace.log \
   --out /workspace/results/candidate_d2_r1.json
 ```
 
 每次调用必须配一个**新 observer 进程**（一次调用只测一个冷启动）。脚本只用于开发，
 组织方固定程序才是正式成绩。
+`--trace-file` 必须指向该进程的 `OB_VSAG_TRACE_FILE`，并启用 `OB_VSAG_TRACE=1`。
+脚本逐条核验 CAGRA build/serve，分别运行 Top-10/100，保留延迟和 ID；还需独立保存 GPU fd 证据。
+`run_cold.py` 可为 D1/D2/D3 各启动三个新进程，保留每次日志、失败 JSON 和 fd，结束后
+只删除该次创建的 `store` 数据目录。`--out` 必须为不存在的绝对路径。批量调用延迟包含
+该 SQL API 自带的一次性 CAGRA 构建，不能当作纯搜索内核延迟或索引构建加速。
 
 本机已在 **lib=vsag** 上验证脚本 SQL/计时链可用（2000×32，first-k=10）：
 `build_total_sec=1.048`、recall@10=0.995、recall@100=0.988；
@@ -167,4 +177,4 @@ GPU 自检输出
 | 召回掉点 | 参数太激进，回到 v4 并逐项加回 |
 | 静默回退 | trace 无 `cuvs_build`，或 observer fd 没有 `/dev/kfd` |
 | 编译找不到 bridge | `CUVS_BRIDGE_LIB` 路径错误或 `.so` 依赖缺失 |
-| 实例被回收 | 单次 4 小时上限；提前保存结果 |
+| 实例被回收 | 以平台当前到期时间和剩余算力为准；本轮页面显示 72 小时自动删除，算力可更早耗尽，提前保存结果 |
