@@ -1,0 +1,9 @@
+{
+  "instance": "rgapi-hf-25780-cb040cc6",
+  "action": "Destroy",
+  "user_confirmed": "现在销毁，停止计费",
+  "verification": "Active Instance\nNo active instance\nGo to Notebook and launch your environment.",
+  "verified_utc": "2026-10-27T17:16:28.275247+00:00",
+  "evidence_archive": "E:/OceanBase2026/amd-cagra-stage2-paused-20261028.zip",
+  "backup_sha256": "0b0a1b4c71e2c1f327c30294c88bc89a2d8a83b87fc2fb5a854b62ab0719bc4a"
+}

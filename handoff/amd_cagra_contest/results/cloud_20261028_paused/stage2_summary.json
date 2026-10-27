@@ -1,0 +1,1444 @@
+{
+  "frozen_baseline_commit": "ad3253a52fbeb3b9fc5b0a097d69f41696d28466",
+  "formal_gpu_comparison": null,
+  "formal_blocker": "Frozen offline CREATE INDEX path fails GPU gate; repaired-control comparisons are development only.",
+  "repaired_control_commit": "fad7f97ca8520471e420e600d0e5437115e6c397",
+  "experiments": {
+    "control-fad7-full": {
+      "D1": {
+        "runs": [
+          {
+            "run": "D1_r1",
+            "path": "control-fad7-full/D1_r1",
+            "status": "PASS",
+            "metrics": {
+              "load_sec": 0.5882287435233593,
+              "create_index_sec": 2.645489815622568,
+              "first_query_sec": 6.578325456008315,
+              "build_total_sec": 9.223817862570286,
+              "first_query_rows": 10,
+              "recall@10": 1.0,
+              "recall@100": 1.0,
+              "query_qps_10": 141.80212902142478,
+              "query_10_p50_ms": 6.791563704609871,
+              "query_10_p95_ms": 8.866317570209503,
+              "batch_qps_10": 18.323382721327366,
+              "batch_10_p50_ms": 5457.507574930787,
+              "batch_10_p95_ms": 5728.483920916915,
+              "batch_recall_10": 1.0,
+              "query_qps_100": 134.30207675506122,
+              "query_100_p50_ms": 7.052385248243809,
+              "query_100_p95_ms": 9.64602455496788,
+              "batch_qps_100": 19.553818117978672,
+              "batch_100_p50_ms": 5114.090731367469,
+              "batch_100_p95_ms": 5366.763884201646,
+              "batch_recall_100": 1.0
+            },
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "cuvs_save": 1,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "knn_simple": 201,
+              "cuvs_build": 1,
+              "cuvs_serve": 201,
+              "cuvs_raw_batch": 6
+            },
+            "phases": {},
+            "gpu_fds": {
+              "pid": 23072,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            }
+          },
+          {
+            "run": "D1_r2",
+            "path": "control-fad7-full/D1_r2",
+            "status": "PASS",
+            "metrics": {
+              "load_sec": 0.5732355657964945,
+              "create_index_sec": 2.6457927133888006,
+              "first_query_sec": 7.427704188972712,
+              "build_total_sec": 10.073500651866198,
+              "first_query_rows": 10,
+              "recall@10": 1.0,
+              "recall@100": 1.0,
+              "query_qps_10": 136.43945001731572,
+              "query_10_p50_ms": 6.98478240519762,
+              "query_10_p95_ms": 9.035034105181694,
+              "batch_qps_10": 15.46538306315854,
+              "batch_10_p50_ms": 6466.053869575262,
+              "batch_10_p95_ms": 7227.940926328301,
+              "batch_recall_10": 1.0,
+              "query_qps_100": 134.9149017667414,
+              "query_100_p50_ms": 7.142568007111549,
+              "query_100_p95_ms": 9.2221200466156,
+              "batch_qps_100": 15.46433003943087,
+              "batch_100_p50_ms": 6466.494167223573,
+              "batch_100_p95_ms": 9054.290959611535,
+              "batch_recall_100": 1.0
+            },
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "cuvs_save": 1,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "knn_simple": 201,
+              "cuvs_build": 1,
+              "cuvs_serve": 201,
+              "cuvs_raw_batch": 6
+            },
+            "phases": {},
+            "gpu_fds": {
+              "pid": 24398,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            }
+          },
+          {
+            "run": "D1_r3",
+            "path": "control-fad7-full/D1_r3",
+            "status": "PASS",
+            "metrics": {
+              "load_sec": 0.5979100689291954,
+              "create_index_sec": 2.5441449265927076,
+              "first_query_sec": 7.20551379956305,
+              "build_total_sec": 9.749661345034838,
+              "first_query_rows": 10,
+              "recall@10": 1.0,
+              "recall@100": 1.0,
+              "query_qps_10": 140.27940117355448,
+              "query_10_p50_ms": 6.732139736413956,
+              "query_10_p95_ms": 9.691223502159119,
+              "batch_qps_10": 18.28654206578161,
+              "batch_10_p50_ms": 5468.5024451464415,
+              "batch_10_p95_ms": 6250.369347631931,
+              "batch_recall_10": 1.0,
+              "query_qps_100": 136.5358979648396,
+              "query_100_p50_ms": 6.92041777074337,
+              "query_100_p95_ms": 10.381713509559631,
+              "batch_qps_100": 18.503351056578477,
+              "batch_100_p50_ms": 5404.426457360387,
+              "batch_100_p95_ms": 8026.4985375106335,
+              "batch_recall_100": 1.0
+            },
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "cuvs_save": 1,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "knn_simple": 201,
+              "cuvs_build": 1,
+              "cuvs_serve": 201,
+              "cuvs_raw_batch": 6
+            },
+            "phases": {},
+            "gpu_fds": {
+              "pid": 25731,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            }
+          }
+        ],
+        "median": {
+          "load_sec": 0.5882287435233593,
+          "create_index_sec": 2.645489815622568,
+          "first_query_sec": 7.20551379956305,
+          "build_total_sec": 9.749661345034838,
+          "first_query_rows": 10,
+          "recall@10": 1.0,
+          "recall@100": 1.0,
+          "query_qps_10": 140.27940117355448,
+          "query_10_p50_ms": 6.791563704609871,
+          "query_10_p95_ms": 9.035034105181694,
+          "batch_qps_10": 18.28654206578161,
+          "batch_10_p50_ms": 5468.5024451464415,
+          "batch_10_p95_ms": 6250.369347631931,
+          "batch_recall_10": 1.0,
+          "query_qps_100": 134.9149017667414,
+          "query_100_p50_ms": 7.052385248243809,
+          "query_100_p95_ms": 9.64602455496788,
+          "batch_qps_100": 18.503351056578477,
+          "batch_100_p50_ms": 5404.426457360387,
+          "batch_100_p95_ms": 8026.4985375106335,
+          "batch_recall_100": 1.0
+        },
+        "three_pass": true
+      },
+      "D2": {
+        "runs": [
+          {
+            "run": "D2_r1",
+            "path": "control-fad7-full/D2_r1",
+            "status": "PASS",
+            "metrics": {
+              "load_sec": 2.9140988420695066,
+              "create_index_sec": 17.92061353288591,
+              "first_query_sec": 18.95410231128335,
+              "build_total_sec": 36.874718993902206,
+              "first_query_rows": 10,
+              "recall@10": 1.0,
+              "recall@100": 0.9989000000000001,
+              "query_qps_10": 134.90457067603575,
+              "query_10_p50_ms": 6.6336169838905334,
+              "query_10_p95_ms": 8.547861129045486,
+              "batch_qps_10": 7.355072316414881,
+              "batch_10_p50_ms": 13596.059385687113,
+              "batch_10_p95_ms": 13872.70838394761,
+              "batch_recall_10": 1.0,
+              "query_qps_100": 135.94967175858733,
+              "query_100_p50_ms": 7.035441696643829,
+              "query_100_p95_ms": 8.93169641494751,
+              "batch_qps_100": 7.197002500134712,
+              "batch_100_p50_ms": 13894.673511385918,
+              "batch_100_p95_ms": 14134.836772456765,
+              "batch_recall_100": 0.9986
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "knn_simple": 201,
+              "cuvs_build": 1,
+              "cuvs_serve": 201,
+              "cuvs_raw_batch": 6
+            },
+            "phases": {},
+            "gpu_fds": {
+              "pid": 27057,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            }
+          },
+          {
+            "run": "D2_r2",
+            "path": "control-fad7-full/D2_r2",
+            "status": "PASS",
+            "metrics": {
+              "load_sec": 2.8835597448050976,
+              "create_index_sec": 17.620100274682045,
+              "first_query_sec": 17.40412655286491,
+              "build_total_sec": 35.02422898821533,
+              "first_query_rows": 10,
+              "recall@10": 1.0,
+              "recall@100": 0.9994,
+              "query_qps_10": 105.17338699737829,
+              "query_10_p50_ms": 7.20235425978899,
+              "query_10_p95_ms": 17.403144389390945,
+              "batch_qps_10": 6.174828027970233,
+              "batch_10_p50_ms": 16194.783004000783,
+              "batch_10_p95_ms": 16978.530211374164,
+              "batch_recall_10": 1.0,
+              "query_qps_100": 125.89529194242469,
+              "query_100_p50_ms": 7.415460422635078,
+              "query_100_p95_ms": 9.538335725665092,
+              "batch_qps_100": 6.662887926493457,
+              "batch_100_p50_ms": 15008.50698724389,
+              "batch_100_p95_ms": 18457.69762247801,
+              "batch_recall_100": 0.9990000000000001
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "knn_simple": 201,
+              "cuvs_build": 1,
+              "cuvs_serve": 201,
+              "cuvs_raw_batch": 6
+            },
+            "phases": {},
+            "gpu_fds": {
+              "pid": 29363,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            }
+          },
+          {
+            "run": "D2_r3",
+            "path": "control-fad7-full/D2_r3",
+            "status": "PASS",
+            "metrics": {
+              "load_sec": 3.036033008247614,
+              "create_index_sec": 19.556138603016734,
+              "first_query_sec": 15.484824584797025,
+              "build_total_sec": 35.04098564758897,
+              "first_query_rows": 10,
+              "recall@10": 1.0,
+              "recall@100": 0.9993000000000001,
+              "query_qps_10": 126.18135782342291,
+              "query_10_p50_ms": 7.285636849701405,
+              "query_10_p95_ms": 8.374512195587158,
+              "batch_qps_10": 4.411673900174995,
+              "batch_10_p50_ms": 22667.13321581483,
+              "batch_10_p95_ms": 29125.574562698603,
+              "batch_recall_10": 1.0,
+              "query_qps_100": 126.14622401268137,
+              "query_100_p50_ms": 7.860965095460415,
+              "query_100_p95_ms": 8.977644145488739,
+              "batch_qps_100": 5.022461050919538,
+              "batch_100_p50_ms": 19910.557590425014,
+              "batch_100_p95_ms": 20754.035951569676,
+              "batch_recall_100": 0.9989
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "knn_simple": 201,
+              "cuvs_build": 1,
+              "cuvs_serve": 201,
+              "cuvs_raw_batch": 6
+            },
+            "phases": {},
+            "gpu_fds": {
+              "pid": 30783,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            }
+          }
+        ],
+        "median": {
+          "load_sec": 2.9140988420695066,
+          "create_index_sec": 17.92061353288591,
+          "first_query_sec": 17.40412655286491,
+          "build_total_sec": 35.04098564758897,
+          "first_query_rows": 10,
+          "recall@10": 1.0,
+          "recall@100": 0.9993000000000001,
+          "query_qps_10": 126.18135782342291,
+          "query_10_p50_ms": 7.20235425978899,
+          "query_10_p95_ms": 8.547861129045486,
+          "batch_qps_10": 6.174828027970233,
+          "batch_10_p50_ms": 16194.783004000783,
+          "batch_10_p95_ms": 16978.530211374164,
+          "batch_recall_10": 1.0,
+          "query_qps_100": 126.14622401268137,
+          "query_100_p50_ms": 7.415460422635078,
+          "query_100_p95_ms": 8.977644145488739,
+          "batch_qps_100": 6.662887926493457,
+          "batch_100_p50_ms": 15008.50698724389,
+          "batch_100_p95_ms": 18457.69762247801,
+          "batch_recall_100": 0.9989
+        },
+        "three_pass": true
+      },
+      "D3": {
+        "runs": [
+          {
+            "run": "D3_r1",
+            "path": "control-fad7-full/D3_r1",
+            "status": "PASS",
+            "metrics": {
+              "load_sec": 5.105678824707866,
+              "create_index_sec": 24.144517816603184,
+              "first_query_sec": 16.249924333766103,
+              "build_total_sec": 40.39450818859041,
+              "first_query_rows": 10,
+              "recall@10": 0.998,
+              "recall@100": 0.9952,
+              "query_qps_10": 123.75997342683993,
+              "query_10_p50_ms": 7.908567786216736,
+              "query_10_p95_ms": 8.696159347891808,
+              "batch_qps_10": 6.96186190004797,
+              "batch_10_p50_ms": 14363.973522558808,
+              "batch_10_p95_ms": 18201.83894596994,
+              "batch_recall_10": 0.9969999999999999,
+              "query_qps_100": 112.05757168325523,
+              "query_100_p50_ms": 8.912362158298492,
+              "query_100_p95_ms": 9.736524894833565,
+              "batch_qps_100": 7.032707429391251,
+              "batch_100_p50_ms": 14219.274867326021,
+              "batch_100_p95_ms": 20336.652141064405,
+              "batch_recall_100": 0.9948999999999999
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "knn_simple": 201,
+              "cuvs_build": 1,
+              "cuvs_serve": 201,
+              "cuvs_raw_batch": 6
+            },
+            "phases": {},
+            "gpu_fds": {
+              "pid": 32227,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            }
+          },
+          {
+            "run": "D3_r2",
+            "path": "control-fad7-full/D3_r2",
+            "status": "PASS",
+            "metrics": {
+              "load_sec": 5.092154068872333,
+              "create_index_sec": 23.431561077013612,
+              "first_query_sec": 15.714456466957927,
+              "build_total_sec": 39.14602065086365,
+              "first_query_rows": 10,
+              "recall@10": 0.9969999999999999,
+              "recall@100": 0.9948999999999999,
+              "query_qps_10": 116.39225627875396,
+              "query_10_p50_ms": 7.9982103779911995,
+              "query_10_p95_ms": 9.768357500433922,
+              "batch_qps_10": 6.309795335848722,
+              "batch_10_p50_ms": 15848.374579101801,
+              "batch_10_p95_ms": 16371.933195739985,
+              "batch_recall_10": 0.997,
+              "query_qps_100": 115.59585057527877,
+              "query_100_p50_ms": 8.656629361212254,
+              "query_100_p95_ms": 9.377818554639816,
+              "batch_qps_100": 6.015705902038488,
+              "batch_100_p50_ms": 16623.153064399958,
+              "batch_100_p95_ms": 18218.161823228,
+              "batch_recall_100": 0.9956999999999999
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "knn_simple": 201,
+              "cuvs_build": 1,
+              "cuvs_serve": 201,
+              "cuvs_raw_batch": 6
+            },
+            "phases": {},
+            "gpu_fds": {
+              "pid": 33667,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            }
+          },
+          {
+            "run": "D3_r3",
+            "path": "control-fad7-full/D3_r3",
+            "status": "PASS",
+            "metrics": {
+              "load_sec": 5.097742946818471,
+              "create_index_sec": 23.531436778604984,
+              "first_query_sec": 18.484109880402684,
+              "build_total_sec": 42.01556719094515,
+              "first_query_rows": 10,
+              "recall@10": 0.997,
+              "recall@100": 0.9952999999999999,
+              "query_qps_10": 119.23359713539587,
+              "query_10_p50_ms": 7.86396861076355,
+              "query_10_p95_ms": 8.735448122024536,
+              "batch_qps_10": 5.6906193769028155,
+              "batch_10_p50_ms": 17572.779582813382,
+              "batch_10_p95_ms": 18224.24902394414,
+              "batch_recall_10": 0.997,
+              "query_qps_100": 115.66996073092622,
+              "query_100_p50_ms": 8.62532015889883,
+              "query_100_p95_ms": 9.428778663277626,
+              "batch_qps_100": 5.804019042358777,
+              "batch_100_p50_ms": 17229.440370574594,
+              "batch_100_p95_ms": 17902.20152027905,
+              "batch_recall_100": 0.995
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "knn_simple": 201,
+              "cuvs_build": 1,
+              "cuvs_serve": 201,
+              "cuvs_raw_batch": 6
+            },
+            "phases": {},
+            "gpu_fds": {
+              "pid": 35123,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            }
+          }
+        ],
+        "median": {
+          "load_sec": 5.097742946818471,
+          "create_index_sec": 23.531436778604984,
+          "first_query_sec": 16.249924333766103,
+          "build_total_sec": 40.39450818859041,
+          "first_query_rows": 10,
+          "recall@10": 0.997,
+          "recall@100": 0.9952,
+          "query_qps_10": 119.23359713539587,
+          "query_10_p50_ms": 7.908567786216736,
+          "query_10_p95_ms": 8.735448122024536,
+          "batch_qps_10": 6.309795335848722,
+          "batch_10_p50_ms": 15848.374579101801,
+          "batch_10_p95_ms": 18201.83894596994,
+          "batch_recall_10": 0.997,
+          "query_qps_100": 115.59585057527877,
+          "query_100_p50_ms": 8.656629361212254,
+          "query_100_p95_ms": 9.428778663277626,
+          "batch_qps_100": 6.015705902038488,
+          "batch_100_p50_ms": 16623.153064399958,
+          "batch_100_p95_ms": 18218.161823228,
+          "batch_recall_100": 0.995
+        },
+        "three_pass": true
+      }
+    },
+    "profile-control-a25e": {
+      "D1": {
+        "runs": [
+          {
+            "run": "D1_r1",
+            "path": "profile-control-a25e/D1_r1",
+            "status": "PROFILE_ONLY",
+            "metrics": {
+              "create_index_sec": 2.5414870884269476,
+              "first_query_sec": 12.554014133289456,
+              "build_total_sec": 15.095504399389029,
+              "first_query_rows": 10,
+              "phase_vsag_sec": 1.960492777,
+              "phase_buffer_sec": 0.009287332,
+              "phase_save_sec": 0.005703621,
+              "phase_restore_sec": 0.002574544,
+              "phase_cagra_build_sec": 12.322103288
+            },
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "cuvs_save": 1,
+              "phase_save": 1,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "phase_restore": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1,
+              "cuvs_build": 1,
+              "cuvs_serve": 1
+            },
+            "phases": {
+              "vsag": {
+                "a": 1960492777,
+                "b": 10000
+              },
+              "buffer": {
+                "a": 9287332,
+                "b": 10000
+              },
+              "save": {
+                "a": 5703621,
+                "b": 0
+              },
+              "restore": {
+                "a": 2574544,
+                "b": 0
+              },
+              "marked": {
+                "a": 1,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 37234,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            },
+            "bridge_loaded": {
+              "expected_path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+              "expected_sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0",
+              "loaded": [
+                {
+                  "path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+                  "sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0"
+                }
+              ]
+            }
+          },
+          {
+            "run": "D1_r2",
+            "path": "profile-control-a25e/D1_r2",
+            "status": "PROFILE_ONLY",
+            "metrics": {
+              "create_index_sec": 2.43975742533803,
+              "first_query_sec": 11.767120169475675,
+              "build_total_sec": 14.20688021555543,
+              "first_query_rows": 10,
+              "phase_vsag_sec": 1.95875009,
+              "phase_buffer_sec": 0.008952621,
+              "phase_save_sec": 0.006103635,
+              "phase_restore_sec": 0.003014708,
+              "phase_cagra_build_sec": 11.533960616
+            },
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "cuvs_save": 1,
+              "phase_save": 1,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "phase_restore": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1,
+              "cuvs_build": 1,
+              "cuvs_serve": 1
+            },
+            "phases": {
+              "vsag": {
+                "a": 1958750090,
+                "b": 10000
+              },
+              "buffer": {
+                "a": 8952621,
+                "b": 10000
+              },
+              "save": {
+                "a": 6103635,
+                "b": 0
+              },
+              "restore": {
+                "a": 3014708,
+                "b": 0
+              },
+              "marked": {
+                "a": 1,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 38677,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            },
+            "bridge_loaded": {
+              "expected_path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+              "expected_sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0",
+              "loaded": [
+                {
+                  "path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+                  "sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0"
+                }
+              ]
+            }
+          },
+          {
+            "run": "D1_r3",
+            "path": "profile-control-a25e/D1_r3",
+            "status": "PROFILE_ONLY",
+            "metrics": {
+              "create_index_sec": 2.5413093753159046,
+              "first_query_sec": 10.423069350421429,
+              "build_total_sec": 12.964381836354733,
+              "first_query_rows": 10,
+              "phase_vsag_sec": 1.967539354,
+              "phase_buffer_sec": 0.009337784,
+              "phase_save_sec": 0.006734926,
+              "phase_restore_sec": 0.003051607,
+              "phase_cagra_build_sec": 10.185335568
+            },
+            "trace_counts": {
+              "create_dense": 2,
+              "add_dense": 10000,
+              "cuvs_save": 1,
+              "phase_save": 1,
+              "delete_index": 1,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "phase_restore": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1,
+              "cuvs_build": 1,
+              "cuvs_serve": 1
+            },
+            "phases": {
+              "vsag": {
+                "a": 1967539354,
+                "b": 10000
+              },
+              "buffer": {
+                "a": 9337784,
+                "b": 10000
+              },
+              "save": {
+                "a": 6734926,
+                "b": 0
+              },
+              "restore": {
+                "a": 3051607,
+                "b": 0
+              },
+              "marked": {
+                "a": 1,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 39148,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            },
+            "bridge_loaded": {
+              "expected_path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+              "expected_sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0",
+              "loaded": [
+                {
+                  "path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+                  "sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0"
+                }
+              ]
+            }
+          }
+        ],
+        "median": {
+          "create_index_sec": 2.5413093753159046,
+          "first_query_sec": 11.767120169475675,
+          "build_total_sec": 14.20688021555543,
+          "first_query_rows": 10,
+          "phase_vsag_sec": 1.960492777,
+          "phase_buffer_sec": 0.009287332,
+          "phase_save_sec": 0.006103635,
+          "phase_restore_sec": 0.003014708,
+          "phase_cagra_build_sec": 11.533960616
+        },
+        "three_pass": true
+      },
+      "D2": {
+        "runs": [
+          {
+            "run": "D2_r1",
+            "path": "profile-control-a25e/D2_r1",
+            "status": "PROFILE_ONLY",
+            "metrics": {
+              "create_index_sec": 16.328094892203808,
+              "first_query_sec": 18.3433632068336,
+              "build_total_sec": 34.67146134003997,
+              "first_query_rows": 10,
+              "phase_vsag_sec": 14.727899915,
+              "phase_buffer_sec": 0.047859145,
+              "phase_save_sec": 0.034870164,
+              "phase_restore_sec": 0.003403983,
+              "phase_cagra_build_sec": 18.085825133
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "phase_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "phase_restore": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1,
+              "cuvs_build": 1,
+              "cuvs_serve": 1
+            },
+            "phases": {
+              "vsag": {
+                "a": 14727899915,
+                "b": 50000
+              },
+              "buffer": {
+                "a": 47859145,
+                "b": 50000
+              },
+              "save": {
+                "a": 34870164,
+                "b": 0
+              },
+              "restore": {
+                "a": 3403983,
+                "b": 0
+              },
+              "marked": {
+                "a": 1,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 39615,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            },
+            "bridge_loaded": {
+              "expected_path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+              "expected_sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0",
+              "loaded": [
+                {
+                  "path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+                  "sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0"
+                }
+              ]
+            }
+          },
+          {
+            "run": "D2_r2",
+            "path": "profile-control-a25e/D2_r2",
+            "status": "PROFILE_ONLY",
+            "metrics": {
+              "create_index_sec": 16.170674273744226,
+              "first_query_sec": 19.270688947290182,
+              "build_total_sec": 35.44136571139097,
+              "first_query_rows": 10,
+              "phase_vsag_sec": 14.703261573,
+              "phase_buffer_sec": 0.043949688,
+              "phase_save_sec": 0.030684072,
+              "phase_restore_sec": 0.003668009,
+              "phase_cagra_build_sec": 19.013790374
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "phase_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "phase_restore": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1,
+              "cuvs_build": 1,
+              "cuvs_serve": 1
+            },
+            "phases": {
+              "vsag": {
+                "a": 14703261573,
+                "b": 50000
+              },
+              "buffer": {
+                "a": 43949688,
+                "b": 50000
+              },
+              "save": {
+                "a": 30684072,
+                "b": 0
+              },
+              "restore": {
+                "a": 3668009,
+                "b": 0
+              },
+              "marked": {
+                "a": 1,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 40099,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            },
+            "bridge_loaded": {
+              "expected_path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+              "expected_sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0",
+              "loaded": [
+                {
+                  "path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+                  "sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0"
+                }
+              ]
+            }
+          },
+          {
+            "run": "D2_r3",
+            "path": "profile-control-a25e/D2_r3",
+            "status": "PROFILE_ONLY",
+            "metrics": {
+              "create_index_sec": 16.402870127931237,
+              "first_query_sec": 18.059097135439515,
+              "build_total_sec": 34.461969673633575,
+              "first_query_rows": 10,
+              "phase_vsag_sec": 14.900696206,
+              "phase_buffer_sec": 0.049303223,
+              "phase_save_sec": 0.033399285,
+              "phase_restore_sec": 0.003335224,
+              "phase_cagra_build_sec": 17.804190288
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "phase_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "phase_restore": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1,
+              "cuvs_build": 1,
+              "cuvs_serve": 1
+            },
+            "phases": {
+              "vsag": {
+                "a": 14900696206,
+                "b": 50000
+              },
+              "buffer": {
+                "a": 49303223,
+                "b": 50000
+              },
+              "save": {
+                "a": 33399285,
+                "b": 0
+              },
+              "restore": {
+                "a": 3335224,
+                "b": 0
+              },
+              "marked": {
+                "a": 1,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 40588,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            },
+            "bridge_loaded": {
+              "expected_path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+              "expected_sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0",
+              "loaded": [
+                {
+                  "path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+                  "sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0"
+                }
+              ]
+            }
+          }
+        ],
+        "median": {
+          "create_index_sec": 16.328094892203808,
+          "first_query_sec": 18.3433632068336,
+          "build_total_sec": 34.67146134003997,
+          "first_query_rows": 10,
+          "phase_vsag_sec": 14.727899915,
+          "phase_buffer_sec": 0.047859145,
+          "phase_save_sec": 0.033399285,
+          "phase_restore_sec": 0.003403983,
+          "phase_cagra_build_sec": 18.085825133
+        },
+        "three_pass": true
+      },
+      "D3": {
+        "runs": [
+          {
+            "run": "D3_r1",
+            "path": "profile-control-a25e/D3_r1",
+            "status": "PROFILE_ONLY",
+            "metrics": {
+              "create_index_sec": 24.708655413240194,
+              "first_query_sec": 19.24532612040639,
+              "build_total_sec": 43.954006832093,
+              "first_query_rows": 10,
+              "phase_vsag_sec": 22.666010433,
+              "phase_buffer_sec": 0.086997628,
+              "phase_save_sec": 0.061461553,
+              "phase_restore_sec": 0.005448474,
+              "phase_cagra_build_sec": 19.056231584
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "phase_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "phase_restore": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1,
+              "cuvs_build": 1,
+              "cuvs_serve": 1
+            },
+            "phases": {
+              "vsag": {
+                "a": 22666010433,
+                "b": 50000
+              },
+              "buffer": {
+                "a": 86997628,
+                "b": 50000
+              },
+              "save": {
+                "a": 61461553,
+                "b": 0
+              },
+              "restore": {
+                "a": 5448474,
+                "b": 0
+              },
+              "marked": {
+                "a": 1,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 41078,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            },
+            "bridge_loaded": {
+              "expected_path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+              "expected_sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0",
+              "loaded": [
+                {
+                  "path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+                  "sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0"
+                }
+              ]
+            }
+          },
+          {
+            "run": "D3_r2",
+            "path": "profile-control-a25e/D3_r2",
+            "status": "PROFILE_ONLY",
+            "metrics": {
+              "create_index_sec": 23.847227493301034,
+              "first_query_sec": 19.81781355664134,
+              "build_total_sec": 43.66504447720945,
+              "first_query_rows": 10,
+              "phase_vsag_sec": 21.919612023,
+              "phase_buffer_sec": 0.087197756,
+              "phase_save_sec": 0.069721508,
+              "phase_restore_sec": 0.007606164,
+              "phase_cagra_build_sec": 19.586146834
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "phase_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "phase_restore": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1,
+              "cuvs_build": 1,
+              "cuvs_serve": 1
+            },
+            "phases": {
+              "vsag": {
+                "a": 21919612023,
+                "b": 50000
+              },
+              "buffer": {
+                "a": 87197756,
+                "b": 50000
+              },
+              "save": {
+                "a": 69721508,
+                "b": 0
+              },
+              "restore": {
+                "a": 7606164,
+                "b": 0
+              },
+              "marked": {
+                "a": 1,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 41583,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            },
+            "bridge_loaded": {
+              "expected_path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+              "expected_sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0",
+              "loaded": [
+                {
+                  "path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+                  "sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0"
+                }
+              ]
+            }
+          },
+          {
+            "run": "D3_r3",
+            "path": "profile-control-a25e/D3_r3",
+            "status": "PROFILE_ONLY",
+            "metrics": {
+              "create_index_sec": 23.5072877202183,
+              "first_query_sec": 15.027063766494393,
+              "build_total_sec": 38.53435526415706,
+              "first_query_rows": 10,
+              "phase_vsag_sec": 21.516274694,
+              "phase_buffer_sec": 0.084903651,
+              "phase_save_sec": 0.06094953,
+              "phase_restore_sec": 0.005621461,
+              "phase_cagra_build_sec": 14.833476575
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "phase_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "phase_restore": 1,
+              "knn_simple": 1,
+              "phase_vsag": 1,
+              "phase_buffer": 1,
+              "phase_marked": 1,
+              "cuvs_build": 1,
+              "cuvs_serve": 1
+            },
+            "phases": {
+              "vsag": {
+                "a": 21516274694,
+                "b": 50000
+              },
+              "buffer": {
+                "a": 84903651,
+                "b": 50000
+              },
+              "save": {
+                "a": 60949530,
+                "b": 0
+              },
+              "restore": {
+                "a": 5621461,
+                "b": 0
+              },
+              "marked": {
+                "a": 1,
+                "b": 0
+              }
+            },
+            "gpu_fds": {
+              "pid": 42095,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            },
+            "bridge_loaded": {
+              "expected_path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+              "expected_sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0",
+              "loaded": [
+                {
+                  "path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+                  "sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0"
+                }
+              ]
+            }
+          }
+        ],
+        "median": {
+          "create_index_sec": 23.847227493301034,
+          "first_query_sec": 19.24532612040639,
+          "build_total_sec": 43.66504447720945,
+          "first_query_rows": 10,
+          "phase_vsag_sec": 21.919612023,
+          "phase_buffer_sec": 0.086997628,
+          "phase_save_sec": 0.061461553,
+          "phase_restore_sec": 0.005621461,
+          "phase_cagra_build_sec": 19.056231584
+        },
+        "three_pass": true
+      }
+    },
+    "experiment-iter80": {
+      "D2": {
+        "runs": [
+          {
+            "run": "D2_r1",
+            "path": "experiment-iter80/D2_r1",
+            "status": "PASS",
+            "metrics": {
+              "load_sec": 2.7527828570455313,
+              "create_index_sec": 16.277887111529708,
+              "first_query_sec": 12.519117921590805,
+              "build_total_sec": 28.797028675675392,
+              "first_query_rows": 10,
+              "recall@10": 1.0,
+              "recall@100": 0.9989,
+              "query_qps_10": 138.17054159695107,
+              "query_10_p50_ms": 7.029621861875057,
+              "query_10_p95_ms": 7.473275065422058,
+              "batch_qps_10": 7.5928058868686925,
+              "batch_10_p50_ms": 13170.36172002554,
+              "batch_10_p95_ms": 13712.476402521133,
+              "batch_recall_10": 1.0,
+              "query_qps_100": 135.7521587463178,
+              "query_100_p50_ms": 7.3883868753910065,
+              "query_100_p95_ms": 7.844328880310059,
+              "batch_qps_100": 7.182299652459456,
+              "batch_100_p50_ms": 13923.117224127054,
+              "batch_100_p95_ms": 16060.31110137701,
+              "batch_recall_100": 0.9991
+            },
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "knn_simple": 201,
+              "cuvs_build": 1,
+              "cuvs_serve": 201,
+              "cuvs_raw_batch": 6
+            },
+            "phases": {},
+            "gpu_fds": {
+              "pid": 42974,
+              "devices": [
+                "/dev/kfd",
+                "/dev/dri/renderD128"
+              ]
+            },
+            "bridge_loaded": {
+              "expected_path": "/workspace/amd-cagra-run/variants/iter80/libseekdb_cuvs_bridge.so",
+              "expected_sha256": "568d33cb90e287916c13b2a549962aa034e2deed01c3f552d9458dee86268e9b",
+              "loaded": [
+                {
+                  "path": "/workspace/amd-cagra-run/variants/iter80/libseekdb_cuvs_bridge.so",
+                  "sha256": "568d33cb90e287916c13b2a549962aa034e2deed01c3f552d9458dee86268e9b"
+                }
+              ]
+            }
+          },
+          {
+            "run": "D2_r2",
+            "path": "experiment-iter80/D2_r2",
+            "trace_counts": {
+              "create_dense": 3,
+              "add_dense": 50000,
+              "cuvs_save": 1,
+              "delete_index": 2,
+              "fdeserialize": 1,
+              "cuvs_restore": 1,
+              "knn_simple": 201,
+              "cuvs_build": 1,
+              "cuvs_serve": 201,
+              "cuvs_raw_batch": 1
+            },
+            "phases": {},
+            "bridge_loaded": {
+              "expected_path": "/workspace/amd-cagra-run/variants/iter80/libseekdb_cuvs_bridge.so",
+              "expected_sha256": "568d33cb90e287916c13b2a549962aa034e2deed01c3f552d9458dee86268e9b",
+              "loaded": [
+                {
+                  "path": "/workspace/amd-cagra-run/variants/iter80/libseekdb_cuvs_bridge.so",
+                  "sha256": "568d33cb90e287916c13b2a549962aa034e2deed01c3f552d9458dee86268e9b"
+                }
+              ]
+            },
+            "status": "STOPPED_BY_USER"
+          }
+        ],
+        "three_pass": false,
+        "partial_sample_statistics_only": {
+          "load_sec": 2.7527828570455313,
+          "create_index_sec": 16.277887111529708,
+          "first_query_sec": 12.519117921590805,
+          "build_total_sec": 28.797028675675392,
+          "first_query_rows": 10,
+          "recall@10": 1.0,
+          "recall@100": 0.9989,
+          "query_qps_10": 138.17054159695107,
+          "query_10_p50_ms": 7.029621861875057,
+          "query_10_p95_ms": 7.473275065422058,
+          "batch_qps_10": 7.5928058868686925,
+          "batch_10_p50_ms": 13170.36172002554,
+          "batch_10_p95_ms": 13712.476402521133,
+          "batch_recall_10": 1.0,
+          "query_qps_100": 135.7521587463178,
+          "query_100_p50_ms": 7.3883868753910065,
+          "query_100_p95_ms": 7.844328880310059,
+          "batch_qps_100": 7.182299652459456,
+          "batch_100_p50_ms": 13923.117224127054,
+          "batch_100_p95_ms": 16060.31110137701,
+          "batch_recall_100": 0.9991
+        }
+      }
+    }
+  },
+  "phase_note": "VSAG and buffer counters are cumulative call durations and may overlap; instrumented totals are diagnostic only.",
+  "work_status": "PAUSED_BY_USER",
+  "stage2_complete": false,
+  "pause_reason": "User stopped for today; resume only after a new user instruction and new AMD instance.",
+  "unfinished_candidate_commit": "ccc1d57959e131c5d94947be0758a0290d346788",
+  "unfinished_experiment": "iter80: D2 run 1 completed, D2 run 2 interrupted, D3 not started. Do not select or report a three-run median.",
+  "snapshot_unit_test": {
+    "filter": "TestVsagAdaptor.cuvs_snapshot_round_trip",
+    "passed": true,
+    "command_log": "snapshot-test/commands.json",
+    "output": "snapshot-test.log"
+  },
+  "source_head": "ccc1d57959e131c5d94947be0758a0290d346788",
+  "source_status_tracked": "",
+  "source_files": {
+    "src/oblib/lib/vector/ob_vsag_adaptor.cpp": "1c701a8ad3f9b761a774ba08816770b1f64f513bf937bf5031605690bfac127e",
+    "src/observer/vector_index/ob_plugin_vector_index_adaptor.cpp": "2d32c1834221e858e3224fea6587ca1c6f867f1ddce6635cc8106ac3710ee5ca",
+    "tools/hipvs_bridge/seekdb_cuvs_bridge.c": "dc3c803d3a6afb0ed3f12819dacb3a17dc8c491de7212000f46b73950812127d",
+    "unittest/oblib/vector/test_vsag_adaptor.cpp": "b7ea1907fa9ba085f8f08f6b38c2aafd6fbd4dfa1aae49063f4b43dffd49921f",
+    "handoff/amd_cagra_contest/bench_build.py": "3bf3e37280b31ba8a2b30a230f696670726f6ccd31a122a92ded3f709c3d2382",
+    "handoff/amd_cagra_contest/run_cold.py": "9ab86ee22d2ddcd976e647c01380434cecd1529e9f1ae7d4a2ca3e19c0c45dba"
+  },
+  "data_hashes": {
+    "D1": {
+      "rows": 10000,
+      "dim": 128,
+      "queries": 100,
+      "seed": 42,
+      "base_f32_sha256": "a3b2b7a31dc716a1d99aba00aaa9fa639c11075ca3236293851c0af1059f48d8",
+      "query_f32_sha256": "9f6e4025d7fa84d982b073f3bfd4dc9dba989a4bb307d56eb8f853987675e23c"
+    },
+    "D2": {
+      "rows": 50000,
+      "dim": 128,
+      "queries": 100,
+      "seed": 42,
+      "base_f32_sha256": "4380ca01e0fec89aad46e90aabb9bf6122bf1eb9ac453674f8e182654ab1ab89",
+      "query_f32_sha256": "e044685bf9472847525c07e8556fa40615d610af340f391e4f5a76c343160ed5"
+    },
+    "D3": {
+      "rows": 50000,
+      "dim": 256,
+      "queries": 100,
+      "seed": 42,
+      "base_f32_sha256": "6b2408fa50c5b5a99cb1c1329b81d64f691c3e1ec846e38c024e0608cf43afd3",
+      "query_f32_sha256": "8dcde314db49f13d243e204d1ef2d2f12616a201269e17379cff8d4482de1db0"
+    }
+  },
+  "official_smoke": {
+    "cases": [
+      {
+        "detail": "build=1 serve=1",
+        "name": "cuvs_l2_route",
+        "status": "PASS"
+      },
+      {
+        "detail": "cuvs_markers=0",
+        "name": "vsag_cpu_route",
+        "status": "PASS"
+      },
+      {
+        "detail": "cosine and inner_product rejected",
+        "name": "ddl_non_l2",
+        "status": "PASS"
+      },
+      {
+        "detail": "n=400 serve=0 exact_match=1",
+        "name": "freshness_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "n=700 build=1 serve=1",
+        "name": "freshness_rebuild",
+        "status": "PASS"
+      },
+      {
+        "detail": "serve=0 exact_match=1",
+        "name": "filter_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "serve=0 exact_match=1 deleted_absent=1",
+        "name": "delete_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "trace=1 rows=1000 recall=1.0000",
+        "name": "batch_knn",
+        "status": "PASS"
+      },
+      {
+        "detail": "trace=1 rows=10000 recall=1.0000",
+        "name": "batch_knn_top100",
+        "status": "PASS"
+      },
+      {
+        "detail": "observer opened /dev/dri/renderD128 and /dev/kfd",
+        "name": "gpu_fd",
+        "status": "PASS"
+      },
+      {
+        "detail": "serve=0 exact_match=1 observer_alive=1",
+        "name": "gpu_unavailable_fallback",
+        "status": "PASS"
+      },
+      {
+        "detail": "all observers stopped and ports closed",
+        "name": "cleanup",
+        "status": "PASS"
+      }
+    ],
+    "status": "PASS"
+  }
+}

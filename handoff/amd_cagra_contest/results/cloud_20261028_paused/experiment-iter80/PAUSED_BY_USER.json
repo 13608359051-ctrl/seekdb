@@ -1,0 +1,22 @@
+{
+  "reason": "User stopped work for today; unfinished runs are not valid three-run candidate results.",
+  "utc": "2026-10-27T16:55:31.938064+00:00",
+  "terminated": [
+    {
+      "pid": 42859,
+      "command": "python3 /workspace/amd-cagra-run/run_variant.py stage2-iter80.bundle ccc1d57959e131c5d94947be0758a0290d346788 iter80 "
+    },
+    {
+      "pid": 42973,
+      "command": "/opt/venv/bin/python3 -u handoff/amd_cagra_contest/run_cold.py --observer /workspace/amd-cagra-run/variants/control100/seekdb --bridge /workspace/amd-cagra-run/variants/iter80/libseekdb_cuvs_bridge.so --out /workspace/amd-cagra-run/experiment-iter80 --datasets D2 D3 "
+    },
+    {
+      "pid": 44232,
+      "command": "/workspace/amd-cagra-run/variants/control100/seekdb --nodaemon --port 2981 --data-dir /workspace/amd-cagra-run/experiment-iter80/D2_r2/store --base-dir /workspace/amd-cagra-run/experiment-iter80/D2_r2 --parameter __min_full_resource_pool_memory=2147483648 --parameter memory_budget=2G --parameter datafile_size=20G --parameter cpu_count=24 --parameter local_ip=127.0.0.1 "
+    },
+    {
+      "pid": 44307,
+      "command": "/opt/venv/bin/python3 /workspace/amd-cagra-run/source/baseline/handoff/amd_cagra_contest/bench_build.py --rows 50000 --dim 128 --queries 100 --trace-file /workspace/amd-cagra-run/experiment-iter80/D2_r2/trace.log --out /workspace/amd-cagra-run/experiment-iter80/D2_r2/result.json "
+    }
+  ]
+}

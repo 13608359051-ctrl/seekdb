@@ -1,0 +1,10 @@
+{
+  "expected_path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+  "expected_sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0",
+  "loaded": [
+    {
+      "path": "/workspace/amd-cagra-run/profile-control/libseekdb_cuvs_bridge.so",
+      "sha256": "6eabf59924627c907f4d9e5485f70074267a2a560e52391edc11b6a87cb5dcb0"
+    }
+  ]
+}

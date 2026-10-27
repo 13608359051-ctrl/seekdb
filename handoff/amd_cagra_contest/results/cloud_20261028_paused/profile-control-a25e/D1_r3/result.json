@@ -1,0 +1,38 @@
+{
+  "status": "PROFILE_ONLY",
+  "config": {
+    "rows": 10000,
+    "dim": 128,
+    "queries": 100,
+    "first_k": 10,
+    "seed": 42,
+    "lib": "cuvs",
+    "distance": "L2",
+    "m": 16,
+    "ef_construction": 200,
+    "ef_search": 200,
+    "batch": 500,
+    "out": "/workspace/amd-cagra-run/profile-control-a25e/D1_r3/result.json",
+    "trace_file": "/workspace/amd-cagra-run/profile-control-a25e/D1_r3/trace.log",
+    "phase_only": true
+  },
+  "timing": {
+    "create_index_sec": 2.5413093753159046,
+    "first_query_sec": 10.423069350421429,
+    "build_total_sec": 12.964381836354733,
+    "first_query_rows": 10
+  },
+  "first_query_ids": [
+    1288,
+    5497,
+    1920,
+    3728,
+    4446,
+    2306,
+    5179,
+    1891,
+    9227,
+    1672
+  ],
+  "note": "Diagnostic probes only; no recall/throughput validation or performance score."
+}

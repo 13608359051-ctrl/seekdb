@@ -1,0 +1,1 @@
+["/opt/venv/bin/python3", "/workspace/amd-cagra-run/source/baseline/handoff/amd_cagra_contest/bench_build.py", "--rows", "50000", "--dim", "128", "--queries", "100", "--trace-file", "/workspace/amd-cagra-run/profile-control-a25e/D2_r3/trace.log", "--out", "/workspace/amd-cagra-run/profile-control-a25e/D2_r3/result.json", "--phase-only"]

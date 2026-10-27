@@ -1,0 +1,13 @@
+{
+  "candidate_commit": "ccc1d57959e131c5d94947be0758a0290d346788",
+  "params": {
+    "graph_degree": 128,
+    "intermediate_graph_degree": 256,
+    "nn_descent_niter": 80
+  },
+  "observer_compiled_commit": "fad7f97ca8520471e420e600d0e5437115e6c397",
+  "observer_src_identical": true,
+  "bridge_sha256": "568d33cb90e287916c13b2a549962aa034e2deed01c3f552d9458dee86268e9b",
+  "observer_sha256": "1a7cda8951353db8bf74e5143baabdd458721f2078615bcc1cb99b73ff481e4a",
+  "comparison": "repaired control only; not frozen official score"
+}

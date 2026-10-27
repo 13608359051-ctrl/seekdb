@@ -2,16 +2,16 @@
 
 ## 状态
 
-2026-10-27 云端实测更新：指定冻结源码已编译成功，官方 GPU smoke 全部通过。
-但“先导入、再 CREATE VECTOR INDEX、首查询”的路径在三次独立冷启动中均缺少
-CAGRA build/serve 证据，不能作为有效 GPU 基线成绩。当前先保留诊断与失败数据，
-尚未进入参数优化。见 `results/BASELINE_FINDINGS_20261027.md`。
+2026-10-28：按用户要求暂停，明天收到新指令及新 AMD 实例后再继续。
+指定冻结源码已编译，但离线 CREATE INDEX 路径 GPU 门禁失败；候选侧已修复快照输入丢失，
+修复对照九次冷启动、九次耗时拆分和官方 smoke 已通过。80 次迭代实验只完成一个 D2 样本，
+尚未选参或形成正式加速结论。先读 `results/PROGRESS_PAUSED_20261028.md`，其中有版本、备份和恢复步骤。
 
 - 官方规则：已确认，见 `HANDOFF.md` §1。
 - 正式基线：已定位并下载，见 §2。
 - 本机 GPU：**不可用**（无 ROCm/hipVS；Windows 780M 不是可用的 hipVS 环境）。
-- 优化实现：**尚未开始**。
-- GPU 实测：已有 smoke 证据；**尚无满足构建计时边界的有效 GPU 基线数字**。
+- 优化实现：离线快照修复已验证；参数实验未完成，当前 80 次迭代源码属于未验收试验。
+- GPU 实测：修复对照已有完整计时、召回、查询及 GPU 证据；**冻结基线离线路径仍缺有效 GPU 构建成绩**。
 - 旧交接包 `hipvs_hnsw_handoff.zip` 基于上游 seekdb，**不适用于本题**，只能作为历史材料。
 
 ## 正式基线（推定冻结）
@@ -34,7 +34,7 @@ kimi/amd-cagra-opt
 基线 commit: ad3253a52fbeb3b9fc5b0a097d69f41696d28466
 ```
 
-该分支当前只放交接文档，**不是可提交的优化版本**。
+该分支包含候选修复及未完成的参数试验，**尚未完成提测验收**。
 
 ## 先读什么
 
@@ -45,7 +45,7 @@ kimi/amd-cagra-opt
 5. `SUBMISSION_CHECKLIST.md`：提交前逐项打勾。
 6. `REFERENCES.md`：赛题、基线、部署、Notebook、Radeon Cloud 的原始链接。
 
-`bench_build.py` 是开发测速入口，**只在 lib=vsag 上验证过 SQL/计时链**，CAGRA/GPU 未跑。
+`bench_build.py` 是开发测速入口，已在 Radeon Cloud 的修复对照上完成 GPU 计时、召回和查询实测。
 `results/bench_harness_vsag_selftest.json` 只是脚本自检，不是本题性能证据。
 
 ## 最重要的一句话
